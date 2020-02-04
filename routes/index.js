@@ -251,7 +251,7 @@ router.get('/metabasecroneg', function(req, res, next) {
 
     var CronJob = require('cron').CronJob;
     //new CronJob('00 00 00 * * *', function() {
-    new CronJob('* * * * * *', function() {
+    new CronJob('59 * * * * *', function() {
 
         axios.get('http://localhost:3000/automation?metaid=1607&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=arabclicks')
             .then(function (response) {
