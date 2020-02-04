@@ -199,7 +199,7 @@ router.get('/metabasecron', function(req, res, next) {
     //new CronJob('00 00 00 * * *', function() {
     new CronJob('* * * * * *', function() {
 
-        axios.get('http://localhost:3000/automation?metaid=133&spreadsheetid=1AZYEgYISOznG6A7DUUG6fnTGXKre8P9o3hNBKFjsO6A&sheetname=RevenuesPerDate')
+        axios.get('http://'+url+'/automation?metaid=133&spreadsheetid=1AZYEgYISOznG6A7DUUG6fnTGXKre8P9o3hNBKFjsO6A&sheetname=RevenuesPerDate')
             .then(function (response) {
                 // handle success
                 console.log(response);
@@ -210,7 +210,7 @@ router.get('/metabasecron', function(req, res, next) {
             });
 
 
-        axios.get('http://localhost:3000/automation?metaid=135&spreadsheetid=1AZYEgYISOznG6A7DUUG6fnTGXKre8P9o3hNBKFjsO6A&sheetname=RevenuesPerFirstSubDate')
+        axios.get('http://'+url+'/automation?metaid=135&spreadsheetid=1AZYEgYISOznG6A7DUUG6fnTGXKre8P9o3hNBKFjsO6A&sheetname=RevenuesPerFirstSubDate')
             .then(function (response) {
                 // handle success
                 console.log(response);
@@ -221,7 +221,7 @@ router.get('/metabasecron', function(req, res, next) {
             });
 
 
-        axios.get('http://localhost:3000/automation?metaid=134&spreadsheetid=1AZYEgYISOznG6A7DUUG6fnTGXKre8P9o3hNBKFjsO6A&sheetname=Subscribers')
+        axios.get('http://'+url+'/automation?metaid=134&spreadsheetid=1AZYEgYISOznG6A7DUUG6fnTGXKre8P9o3hNBKFjsO6A&sheetname=Subscribers')
             .then(function (response) {
                 // handle success
                 console.log(response);
@@ -232,7 +232,7 @@ router.get('/metabasecron', function(req, res, next) {
             });
 
 
-        axios.get('http://localhost:3000/automation?metaid=142&spreadsheetid=1AZYEgYISOznG6A7DUUG6fnTGXKre8P9o3hNBKFjsO6A&sheetname=UnSubscribers')
+        axios.get('http://'+url+'/automation?metaid=142&spreadsheetid=1AZYEgYISOznG6A7DUUG6fnTGXKre8P9o3hNBKFjsO6A&sheetname=UnSubscribers')
             .then(function (response) {
                 // handle success
                 console.log(response);
@@ -253,12 +253,11 @@ router.get('/metabasecroneg', function(req, res, next) {
 
     var url = req.headers.host;
 
-    console.log("REQUEST TO " + url);
     var CronJob = require('cron').CronJob;
     //new CronJob('00 00 00 * * *', function() {
     new CronJob('59 * * * * *', function() {
 
-        axios.get('http://localhost:3000/automation?metaid=1607&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=arabclicks')
+        axios.get('http://'+url+'/automation?metaid=1607&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=arabclicks')
             .then(function (response) {
                 // handle success
                 console.log(response);
@@ -269,7 +268,7 @@ router.get('/metabasecroneg', function(req, res, next) {
             });
 
 
-        axios.get('http://localhost:3000/automation?metaid=1641&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=arabyads')
+        axios.get('http://'+url+'/automation?metaid=1641&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=arabyads')
             .then(function (response) {
                 // handle success
                 console.log(response);
@@ -280,7 +279,7 @@ router.get('/metabasecroneg', function(req, res, next) {
             });
 
 
-        axios.get('http://localhost:3000/automation?metaid=1650&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=armorads')
+        axios.get('http://'+url+'/automation?metaid=1650&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=armorads')
             .then(function (response) {
                 // handle success
                 console.log(response);
@@ -290,7 +289,7 @@ router.get('/metabasecroneg', function(req, res, next) {
                 console.log(error);
             });
 
-        axios.get('http://localhost:3000/automation?metaid=1659&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=facebook')
+        axios.get('http://'+url+'/automation?metaid=1659&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=facebook')
             .then(function (response) {
                 // handle success
                 console.log(response);
@@ -300,7 +299,7 @@ router.get('/metabasecroneg', function(req, res, next) {
                 console.log(error);
             });
 
-        axios.get('http://localhost:3000/automation?metaid=1668&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=google')
+        axios.get('http://'+url+'/automation?metaid=1668&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=google')
             .then(function (response) {
                 // handle success
                 console.log(response);
@@ -310,7 +309,7 @@ router.get('/metabasecroneg', function(req, res, next) {
                 console.log(error);
             });
 
-        axios.get('http://localhost:3000/automation?metaid=1677&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=instagram')
+        axios.get('http://'+url+'/automation?metaid=1677&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=instagram')
             .then(function (response) {
                 // handle success
                 console.log(response);
@@ -320,7 +319,7 @@ router.get('/metabasecroneg', function(req, res, next) {
                 console.log(error);
             });
 
-        axios.get('http://localhost:3000/automation?metaid=1686&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=netaffiliation')
+        axios.get('http://'+url+'/automation?metaid=1686&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=netaffiliation')
             .then(function (response) {
                 // handle success
                 console.log(response);
@@ -331,7 +330,7 @@ router.get('/metabasecroneg', function(req, res, next) {
             });
 
 
-        axios.get('http://localhost:3000/automation?metaid=1695&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=voice')
+        axios.get('http://'+url+'/automation?metaid=1695&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=voice')
             .then(function (response) {
                 // handle success
                 console.log(response);
@@ -341,7 +340,7 @@ router.get('/metabasecroneg', function(req, res, next) {
                 console.log(error);
             });
 
-        axios.get('http://localhost:3000/automation?metaid=1704&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=wizzo')
+        axios.get('http://'+url+'/automation?metaid=1704&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=wizzo')
             .then(function (response) {
                 // handle success
                 console.log(response);
@@ -351,7 +350,7 @@ router.get('/metabasecroneg', function(req, res, next) {
                 console.log(error);
             });
 
-        axios.get('http://localhost:3000/automation?metaid=1735&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=nosource')
+        axios.get('http://'+url+'/automation?metaid=1735&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=nosource')
             .then(function (response) {
                 // handle success
                 console.log(response);
