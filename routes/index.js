@@ -1191,7 +1191,7 @@ router.get('/metabasecrontn', function(req, res, next) {
 
     var CronJob = require('cron').CronJob;
     //new CronJob('00 00 00 * * *', function() {
-    new CronJob('* 16 16 * * *', function() {
+    new CronJob('* 20 * * * *', function() {
 
         axios.get('http://'+url+'/automation?metaid=1611&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=arabclicks')
             .then(function (response) {
