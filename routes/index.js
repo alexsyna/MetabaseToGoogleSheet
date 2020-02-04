@@ -8,6 +8,8 @@ var sheets = google.sheets('v4');
 const fs = require('fs');
 const readline = require('readline');
 /* GET home page. */
+
+
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
@@ -190,6 +192,7 @@ router.get('/automation', function(req, res, next) {
 
 
 router.get('/metabasecron', function(req, res, next) {
+    var url = request.headers.host;
 
 
     var CronJob = require('cron').CronJob;
@@ -248,7 +251,9 @@ router.get('/metabasecron', function(req, res, next) {
 
 router.get('/metabasecroneg', function(req, res, next) {
 
+    var url = req.headers.host;
 
+    console.log("REQUEST TO " + url);
     var CronJob = require('cron').CronJob;
     //new CronJob('00 00 00 * * *', function() {
     new CronJob('59 * * * * *', function() {
