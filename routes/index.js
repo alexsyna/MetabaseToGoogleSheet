@@ -7,6 +7,7 @@ const {google} = require('googleapis');
 var sheets = google.sheets('v4');
 const fs = require('fs');
 const readline = require('readline');
+const moment = require('moment');
 /* GET home page. */
 
 
@@ -28,8 +29,6 @@ router.get('/automation', function(req, res, next) {
 
     axios.post('https://reporting-flashwin.gugroup.com/api/session', data)
         .then(function (response) {
-
-
 
 
 
@@ -135,6 +134,7 @@ router.get('/automation', function(req, res, next) {
                         }, (err, result) => {
                             if (err) {
                                 // Handle error.
+                                res.send('ERROR in delete');
                                 console.log(err);
                             } else {
                                 console.log(`Cells deleted in sheet:` + spreadsheetId +' with metabase id:' + metaid);
@@ -156,10 +156,13 @@ router.get('/automation', function(req, res, next) {
                                 }, (err, result) => {
                                     if (err) {
                                         // Handle error.
+                                        res.send('ERROR in update');
                                         console.log(err);
                                     } else {
+                                        res.send('OK delete-update');
                                         console.log(`Cells updated in sheet:` + spreadsheetId +' with metabase id:' + metaid);
                                         console.log('==================');
+
                                     }
                                 });
                             }
@@ -176,6 +179,7 @@ router.get('/automation', function(req, res, next) {
 
                 })
                 .catch(function (error) {
+                    res.send('Error fetching metabase report. Maybe check query');
                     console.log(error);
                 });
 
@@ -183,6 +187,7 @@ router.get('/automation', function(req, res, next) {
 
     })
         .catch(function (error) {
+            res.send('Error getting metabase auth.');
             console.log(error);
         });
 
@@ -202,7 +207,31 @@ router.get('/metabasecron', function(req, res, next) {
         axios.get('http://'+url+'/automation?metaid=133&spreadsheetid=1AZYEgYISOznG6A7DUUG6fnTGXKre8P9o3hNBKFjsO6A&sheetname=RevenuesPerDate')
             .then(function (response) {
                 // handle success
-                console.log(response);
+                axios.get('http://'+url+'/automation?metaid=135&spreadsheetid=1AZYEgYISOznG6A7DUUG6fnTGXKre8P9o3hNBKFjsO6A&sheetname=RevenuesPerFirstSubDate')
+                    .then(function (response) {
+                        // handle success
+                        axios.get('http://'+url+'/automation?metaid=134&spreadsheetid=1AZYEgYISOznG6A7DUUG6fnTGXKre8P9o3hNBKFjsO6A&sheetname=Subscribers')
+                            .then(function (response) {
+                                // handle success
+                                axios.get('http://'+url+'/automation?metaid=142&spreadsheetid=1AZYEgYISOznG6A7DUUG6fnTGXKre8P9o3hNBKFjsO6A&sheetname=UnSubscribers')
+                                    .then(function (response) {
+                                        // handle success
+                                        console.log("ROI - 4 exports ran succesfully at :"+moment().format());
+                                    })
+                                    .catch(function (error) {
+                                        // handle error
+                                        console.log(error);
+                                    });
+                            })
+                            .catch(function (error) {
+                                // handle error
+                                console.log(error);
+                            });
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    });
             })
             .catch(function (error) {
                 // handle error
@@ -210,37 +239,13 @@ router.get('/metabasecron', function(req, res, next) {
             });
 
 
-        axios.get('http://'+url+'/automation?metaid=135&spreadsheetid=1AZYEgYISOznG6A7DUUG6fnTGXKre8P9o3hNBKFjsO6A&sheetname=RevenuesPerFirstSubDate')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
 
 
-        axios.get('http://'+url+'/automation?metaid=134&spreadsheetid=1AZYEgYISOznG6A7DUUG6fnTGXKre8P9o3hNBKFjsO6A&sheetname=Subscribers')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
 
 
-        axios.get('http://'+url+'/automation?metaid=142&spreadsheetid=1AZYEgYISOznG6A7DUUG6fnTGXKre8P9o3hNBKFjsO6A&sheetname=UnSubscribers')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
+
+
+
 
 
     }, null, true, 'America/Los_Angeles');
@@ -260,988 +265,43 @@ router.get('/metabasecroneg', function(req, res, next) {
         axios.get('http://'+url+'/automation?metaid=1607&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=arabclicks')
             .then(function (response) {
                 // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
 
-
-        axios.get('http://'+url+'/automation?metaid=1641&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=arabyads')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-        axios.get('http://'+url+'/automation?metaid=1650&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=armorads')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1659&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=facebook')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1668&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=google')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1677&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=instagram')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1686&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=netaffiliation')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-        axios.get('http://'+url+'/automation?metaid=1695&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=voice')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1704&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=wizzo')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1735&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=nosource')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-    }, null, true, 'America/Los_Angeles');
-
-
-});
-
-router.get('/metabasecronae', function(req, res, next) {
-
-    var url = req.headers.host;
-
-    var CronJob = require('cron').CronJob;
-    //new CronJob('00 00 00 * * *', function() {
-    new CronJob('* 10 0 * * *', function() {
-
-        axios.get('http://'+url+'/automation?metaid=1608&spreadsheetid=1u9fpBU-fTCbLbXIMtvK16oVo0RS9doJENLjkjQd2O4w&sheetname=arabclicks')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-        axios.get('http://'+url+'/automation?metaid=1642&spreadsheetid=1u9fpBU-fTCbLbXIMtvK16oVo0RS9doJENLjkjQd2O4w&sheetname=arabyads')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-        axios.get('http://'+url+'/automation?metaid=1651&spreadsheetid=1u9fpBU-fTCbLbXIMtvK16oVo0RS9doJENLjkjQd2O4w&sheetname=armorads')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1660&spreadsheetid=1u9fpBU-fTCbLbXIMtvK16oVo0RS9doJENLjkjQd2O4w&sheetname=facebook')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1669&spreadsheetid=1u9fpBU-fTCbLbXIMtvK16oVo0RS9doJENLjkjQd2O4w&sheetname=google')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1678&spreadsheetid=1u9fpBU-fTCbLbXIMtvK16oVo0RS9doJENLjkjQd2O4w&sheetname=instagram')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1687&spreadsheetid=1u9fpBU-fTCbLbXIMtvK16oVo0RS9doJENLjkjQd2O4w&sheetname=netaffiliation')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-        axios.get('http://'+url+'/automation?metaid=1696&spreadsheetid=1u9fpBU-fTCbLbXIMtvK16oVo0RS9doJENLjkjQd2O4w&sheetname=voice')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1705&spreadsheetid=1u9fpBU-fTCbLbXIMtvK16oVo0RS9doJENLjkjQd2O4w&sheetname=wizzo')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1736&spreadsheetid=1u9fpBU-fTCbLbXIMtvK16oVo0RS9doJENLjkjQd2O4w&sheetname=nosource')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-    }, null, true, 'America/Los_Angeles');
-
-
-});
-
-router.get('/metabasecronbh', function(req, res, next) {
-
-    var url = req.headers.host;
-
-    var CronJob = require('cron').CronJob;
-    //new CronJob('00 00 00 * * *', function() {
-    new CronJob('* 15 0 * * *', function() {
-
-        axios.get('http://'+url+'/automation?metaid=1609&spreadsheetid=16zBZ5AmmzicG4BJ2brLtWou_Icx8LpM70FlIej_rt90&sheetname=arabclicks')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-        axios.get('http://'+url+'/automation?metaid=1643&spreadsheetid=16zBZ5AmmzicG4BJ2brLtWou_Icx8LpM70FlIej_rt90&sheetname=arabyads')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-        axios.get('http://'+url+'/automation?metaid=1652&spreadsheetid=16zBZ5AmmzicG4BJ2brLtWou_Icx8LpM70FlIej_rt90&sheetname=armorads')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1661&spreadsheetid=16zBZ5AmmzicG4BJ2brLtWou_Icx8LpM70FlIej_rt90&sheetname=facebook')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1670&spreadsheetid=16zBZ5AmmzicG4BJ2brLtWou_Icx8LpM70FlIej_rt90&sheetname=google')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1679&spreadsheetid=16zBZ5AmmzicG4BJ2brLtWou_Icx8LpM70FlIej_rt90&sheetname=instagram')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1688&spreadsheetid=16zBZ5AmmzicG4BJ2brLtWou_Icx8LpM70FlIej_rt90&sheetname=netaffiliation')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-        axios.get('http://'+url+'/automation?metaid=1697&spreadsheetid=16zBZ5AmmzicG4BJ2brLtWou_Icx8LpM70FlIej_rt90&sheetname=voice')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1706&spreadsheetid=16zBZ5AmmzicG4BJ2brLtWou_Icx8LpM70FlIej_rt90&sheetname=wizzo')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1737&spreadsheetid=16zBZ5AmmzicG4BJ2brLtWou_Icx8LpM70FlIej_rt90&sheetname=nosource')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-    }, null, true, 'America/Los_Angeles');
-
-
-});
-
-router.get('/metabasecroniq', function(req, res, next) {
-
-    var url = req.headers.host;
-
-    var CronJob = require('cron').CronJob;
-    //new CronJob('00 00 00 * * *', function() {
-    new CronJob('* 20 0 * * *', function() {
-
-        axios.get('http://'+url+'/automation?metaid=1640&spreadsheetid=1mtjKsr617kk4HgWeYGDEu4nAu426yac6NUzLSppiteY&sheetname=arabclicks')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-        axios.get('http://'+url+'/automation?metaid=1649&spreadsheetid=1mtjKsr617kk4HgWeYGDEu4nAu426yac6NUzLSppiteY&sheetname=arabyads')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-        axios.get('http://'+url+'/automation?metaid=1658&spreadsheetid=1mtjKsr617kk4HgWeYGDEu4nAu426yac6NUzLSppiteY&sheetname=armorads')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1667&spreadsheetid=1mtjKsr617kk4HgWeYGDEu4nAu426yac6NUzLSppiteY&sheetname=facebook')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1676&spreadsheetid=1mtjKsr617kk4HgWeYGDEu4nAu426yac6NUzLSppiteY&sheetname=google')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1685&spreadsheetid=1mtjKsr617kk4HgWeYGDEu4nAu426yac6NUzLSppiteY&sheetname=instagram')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1694&spreadsheetid=1mtjKsr617kk4HgWeYGDEu4nAu426yac6NUzLSppiteY&sheetname=netaffiliation')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-        axios.get('http://'+url+'/automation?metaid=1703&spreadsheetid=1mtjKsr617kk4HgWeYGDEu4nAu426yac6NUzLSppiteY&sheetname=voice')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1712&spreadsheetid=1mtjKsr617kk4HgWeYGDEu4nAu426yac6NUzLSppiteY&sheetname=wizzo')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1743&spreadsheetid=1mtjKsr617kk4HgWeYGDEu4nAu426yac6NUzLSppiteY&sheetname=nosource')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-    }, null, true, 'America/Los_Angeles');
-
-
-});
-
-router.get('/metabasecronjo', function(req, res, next) {
-
-    var url = req.headers.host;
-
-    var CronJob = require('cron').CronJob;
-    //new CronJob('00 00 00 * * *', function() {
-    new CronJob('* 25 0 * * *', function() {
-
-        axios.get('http://'+url+'/automation?metaid=1610&spreadsheetid=13EmU8VUfec-8lC6FpdSFydoJZOsO8JPbSU2YSm5JS04&sheetname=arabclicks')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-        axios.get('http://'+url+'/automation?metaid=1644&spreadsheetid=13EmU8VUfec-8lC6FpdSFydoJZOsO8JPbSU2YSm5JS04&sheetname=arabyads')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-        axios.get('http://'+url+'/automation?metaid=1653&spreadsheetid=13EmU8VUfec-8lC6FpdSFydoJZOsO8JPbSU2YSm5JS04&sheetname=armorads')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1662&spreadsheetid=13EmU8VUfec-8lC6FpdSFydoJZOsO8JPbSU2YSm5JS04&sheetname=facebook')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1671&spreadsheetid=13EmU8VUfec-8lC6FpdSFydoJZOsO8JPbSU2YSm5JS04&sheetname=google')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1680&spreadsheetid=13EmU8VUfec-8lC6FpdSFydoJZOsO8JPbSU2YSm5JS04&sheetname=instagram')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1689&spreadsheetid=13EmU8VUfec-8lC6FpdSFydoJZOsO8JPbSU2YSm5JS04&sheetname=netaffiliation')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-        axios.get('http://'+url+'/automation?metaid=1698&spreadsheetid=13EmU8VUfec-8lC6FpdSFydoJZOsO8JPbSU2YSm5JS04&sheetname=voice')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1707&spreadsheetid=13EmU8VUfec-8lC6FpdSFydoJZOsO8JPbSU2YSm5JS04&sheetname=wizzo')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1738&spreadsheetid=13EmU8VUfec-8lC6FpdSFydoJZOsO8JPbSU2YSm5JS04&sheetname=nosource')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-    }, null, true, 'America/Los_Angeles');
-
-
-});
-
-router.get('/metabasecronkw', function(req, res, next) {
-
-    var url = req.headers.host;
-
-    var CronJob = require('cron').CronJob;
-    //new CronJob('00 00 00 * * *', function() {
-    new CronJob('* 30 0 * * *', function() {
-
-        axios.get('http://'+url+'/automation?metaid=1613&spreadsheetid=1BrU9az8JTALQ5kOh2nMe-QAPeSyDGyb3ZIcbKoM_Xqg&sheetname=arabclicks')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-        axios.get('http://'+url+'/automation?metaid=1647&spreadsheetid=1BrU9az8JTALQ5kOh2nMe-QAPeSyDGyb3ZIcbKoM_Xqg&sheetname=arabyads')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-        axios.get('http://'+url+'/automation?metaid=1656&spreadsheetid=1BrU9az8JTALQ5kOh2nMe-QAPeSyDGyb3ZIcbKoM_Xqg&sheetname=armorads')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1665&spreadsheetid=1BrU9az8JTALQ5kOh2nMe-QAPeSyDGyb3ZIcbKoM_Xqg&sheetname=facebook')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1674&spreadsheetid=1BrU9az8JTALQ5kOh2nMe-QAPeSyDGyb3ZIcbKoM_Xqg&sheetname=google')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1683&spreadsheetid=1BrU9az8JTALQ5kOh2nMe-QAPeSyDGyb3ZIcbKoM_Xqg&sheetname=instagram')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1692&spreadsheetid=1BrU9az8JTALQ5kOh2nMe-QAPeSyDGyb3ZIcbKoM_Xqg&sheetname=netaffiliation')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-        axios.get('http://'+url+'/automation?metaid=1701&spreadsheetid=1BrU9az8JTALQ5kOh2nMe-QAPeSyDGyb3ZIcbKoM_Xqg&sheetname=voice')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1710&spreadsheetid=1BrU9az8JTALQ5kOh2nMe-QAPeSyDGyb3ZIcbKoM_Xqg&sheetname=wizzo')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1741&spreadsheetid=1BrU9az8JTALQ5kOh2nMe-QAPeSyDGyb3ZIcbKoM_Xqg&sheetname=nosource')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-    }, null, true, 'America/Los_Angeles');
-
-
-});
-
-router.get('/metabasecronps', function(req, res, next) {
-
-    var url = req.headers.host;
-
-    var CronJob = require('cron').CronJob;
-    //new CronJob('00 00 00 * * *', function() {
-    new CronJob('* 35 0 * * *', function() {
-
-        axios.get('http://'+url+'/automation?metaid=1612&spreadsheetid=1uw8q-L3c5FrSHUsxnO2a1uDTf6riAv2mDmDTOV5xI0M&sheetname=arabclicks')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-        axios.get('http://'+url+'/automation?metaid=1646&spreadsheetid=1uw8q-L3c5FrSHUsxnO2a1uDTf6riAv2mDmDTOV5xI0M&sheetname=arabyads')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-        axios.get('http://'+url+'/automation?metaid=1655&spreadsheetid=1uw8q-L3c5FrSHUsxnO2a1uDTf6riAv2mDmDTOV5xI0M&sheetname=armorads')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1664&spreadsheetid=1uw8q-L3c5FrSHUsxnO2a1uDTf6riAv2mDmDTOV5xI0M&sheetname=facebook')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1673&spreadsheetid=1uw8q-L3c5FrSHUsxnO2a1uDTf6riAv2mDmDTOV5xI0M&sheetname=google')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1682&spreadsheetid=1uw8q-L3c5FrSHUsxnO2a1uDTf6riAv2mDmDTOV5xI0M&sheetname=instagram')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1691&spreadsheetid=1uw8q-L3c5FrSHUsxnO2a1uDTf6riAv2mDmDTOV5xI0M&sheetname=netaffiliation')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-        axios.get('http://'+url+'/automation?metaid=1700&spreadsheetid=1uw8q-L3c5FrSHUsxnO2a1uDTf6riAv2mDmDTOV5xI0M&sheetname=voice')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1709&spreadsheetid=1uw8q-L3c5FrSHUsxnO2a1uDTf6riAv2mDmDTOV5xI0M&sheetname=wizzo')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1740&spreadsheetid=1uw8q-L3c5FrSHUsxnO2a1uDTf6riAv2mDmDTOV5xI0M&sheetname=nosource')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-    }, null, true, 'America/Los_Angeles');
-
-
-});
-
-router.get('/metabasecronsa', function(req, res, next) {
-
-    var url = req.headers.host;
-
-    var CronJob = require('cron').CronJob;
-    //new CronJob('00 00 00 * * *', function() {
-    new CronJob('* 40 0 * * *', function() {
-
-        axios.get('http://'+url+'/automation?metaid=1639&spreadsheetid=1a06IlUcIDIO9uncgeX9nrcuqvhvx-FM5IqyrDj4Un28&sheetname=arabclicks')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-        axios.get('http://'+url+'/automation?metaid=1648&spreadsheetid=1a06IlUcIDIO9uncgeX9nrcuqvhvx-FM5IqyrDj4Un28&sheetname=arabyads')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-        axios.get('http://'+url+'/automation?metaid=1657&spreadsheetid=1a06IlUcIDIO9uncgeX9nrcuqvhvx-FM5IqyrDj4Un28&sheetname=armorads')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1666&spreadsheetid=1a06IlUcIDIO9uncgeX9nrcuqvhvx-FM5IqyrDj4Un28&sheetname=facebook')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1675&spreadsheetid=1a06IlUcIDIO9uncgeX9nrcuqvhvx-FM5IqyrDj4Un28&sheetname=google')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1684&spreadsheetid=1a06IlUcIDIO9uncgeX9nrcuqvhvx-FM5IqyrDj4Un28&sheetname=instagram')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1693&spreadsheetid=1a06IlUcIDIO9uncgeX9nrcuqvhvx-FM5IqyrDj4Un28&sheetname=netaffiliation')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-        axios.get('http://'+url+'/automation?metaid=1702&spreadsheetid=1a06IlUcIDIO9uncgeX9nrcuqvhvx-FM5IqyrDj4Un28&sheetname=voice')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1711&spreadsheetid=1a06IlUcIDIO9uncgeX9nrcuqvhvx-FM5IqyrDj4Un28&sheetname=wizzo')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1742&spreadsheetid=1a06IlUcIDIO9uncgeX9nrcuqvhvx-FM5IqyrDj4Un28&sheetname=nosource')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-    }, null, true, 'America/Los_Angeles');
-
-
-});
-
-router.get('/metabasecrontn', function(req, res, next) {
-
-    var url = req.headers.host;
-
-    var CronJob = require('cron').CronJob;
-    //new CronJob('00 00 00 * * *', function() {
-    new CronJob('* 30 * * * *', function() {
-
-        axios.get('http://'+url+'/automation?metaid=1611&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=arabclicks')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-                axios.get('http://'+url+'/automation?metaid=1645&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=arabyads')
+                axios.get('http://'+url+'/automation?metaid=1641&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=arabyads')
                     .then(function (response) {
                         // handle success
-                        console.log(response);
-                        axios.get('http://'+url+'/automation?metaid=1645&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=arabyads')
+
+                        axios.get('http://'+url+'/automation?metaid=1650&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=armorads')
                             .then(function (response) {
                                 // handle success
-                                console.log(response);
-                                axios.get('http://'+url+'/automation?metaid=1654&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=armorads')
+
+                                axios.get('http://'+url+'/automation?metaid=1659&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=facebook')
                                     .then(function (response) {
                                         // handle success
-                                        console.log(response);
-                                        axios.get('http://'+url+'/automation?metaid=1663&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=facebook')
+
+                                        axios.get('http://'+url+'/automation?metaid=1668&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=google')
                                             .then(function (response) {
                                                 // handle success
-                                                console.log(response);
-                                                axios.get('http://'+url+'/automation?metaid=1672&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=google')
+
+                                                axios.get('http://'+url+'/automation?metaid=1677&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=instagram')
                                                     .then(function (response) {
                                                         // handle success
-                                                        console.log(response);
-                                                        axios.get('http://'+url+'/automation?metaid=1681&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=instagram')
+
+                                                        axios.get('http://'+url+'/automation?metaid=1686&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=netaffiliation')
                                                             .then(function (response) {
                                                                 // handle success
-                                                                console.log(response);
-                                                                axios.get('http://'+url+'/automation?metaid=1690&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=netaffiliation')
+
+                                                                axios.get('http://'+url+'/automation?metaid=1695&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=voice')
                                                                     .then(function (response) {
                                                                         // handle success
-                                                                        console.log(response);
-                                                                        axios.get('http://'+url+'/automation?metaid=1699&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=voice')
+
+                                                                        axios.get('http://'+url+'/automation?metaid=1704&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=wizzo')
                                                                             .then(function (response) {
                                                                                 // handle success
-                                                                                console.log(response);
-                                                                                axios.get('http://'+url+'/automation?metaid=1708&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=wizzo')
+
+                                                                                axios.get('http://'+url+'/automation?metaid=1735&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=nosource')
                                                                                     .then(function (response) {
                                                                                         // handle success
-                                                                                        console.log(response);
-                                                                                        axios.get('http://'+url+'/automation?metaid=1739&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=nosource')
-                                                                                            .then(function (response) {
-                                                                                                // handle success
-                                                                                                console.log(response);
-                                                                                            })
-                                                                                            .catch(function (error) {
-                                                                                                // handle error
-                                                                                                console.log(error);
-                                                                                                res.send('OK');                                                                                            });
+                                                                                        console.log("EG LTV- 10 exports ran succesfully at :"+moment().format());
                                                                                     })
                                                                                     .catch(function (error) {
                                                                                         // handle error
@@ -1291,6 +351,912 @@ router.get('/metabasecrontn', function(req, res, next) {
             .catch(function (error) {
                 // handle error
                 console.log(error);
+            });
+
+
+
+
+    }, null, true, 'America/Los_Angeles');
+
+
+});
+
+router.get('/metabasecronae', function(req, res, next) {
+
+    var url = req.headers.host;
+
+    var CronJob = require('cron').CronJob;
+    //new CronJob('00 00 00 * * *', function() {
+    new CronJob('* 10 0 * * *', function() {
+
+        axios.get('http://'+url+'/automation?metaid=1608&spreadsheetid=1u9fpBU-fTCbLbXIMtvK16oVo0RS9doJENLjkjQd2O4w&sheetname=arabclicks')
+            .then(function (response) {
+                // handle success
+
+                axios.get('http://'+url+'/automation?metaid=1642&spreadsheetid=1u9fpBU-fTCbLbXIMtvK16oVo0RS9doJENLjkjQd2O4w&sheetname=arabyads')
+                    .then(function (response) {
+                        // handle success
+
+                        axios.get('http://'+url+'/automation?metaid=1651&spreadsheetid=1u9fpBU-fTCbLbXIMtvK16oVo0RS9doJENLjkjQd2O4w&sheetname=armorads')
+                            .then(function (response) {
+                                // handle success
+
+                                axios.get('http://'+url+'/automation?metaid=1660&spreadsheetid=1u9fpBU-fTCbLbXIMtvK16oVo0RS9doJENLjkjQd2O4w&sheetname=facebook')
+                                    .then(function (response) {
+                                        // handle success
+
+                                        axios.get('http://'+url+'/automation?metaid=1669&spreadsheetid=1u9fpBU-fTCbLbXIMtvK16oVo0RS9doJENLjkjQd2O4w&sheetname=google')
+                                            .then(function (response) {
+                                                // handle success
+
+                                                axios.get('http://'+url+'/automation?metaid=1678&spreadsheetid=1u9fpBU-fTCbLbXIMtvK16oVo0RS9doJENLjkjQd2O4w&sheetname=instagram')
+                                                    .then(function (response) {
+                                                        // handle success
+
+                                                        axios.get('http://'+url+'/automation?metaid=1687&spreadsheetid=1u9fpBU-fTCbLbXIMtvK16oVo0RS9doJENLjkjQd2O4w&sheetname=netaffiliation')
+                                                            .then(function (response) {
+                                                                // handle success
+
+                                                                axios.get('http://'+url+'/automation?metaid=1696&spreadsheetid=1u9fpBU-fTCbLbXIMtvK16oVo0RS9doJENLjkjQd2O4w&sheetname=voice')
+                                                                    .then(function (response) {
+                                                                        // handle success
+
+                                                                        axios.get('http://'+url+'/automation?metaid=1705&spreadsheetid=1u9fpBU-fTCbLbXIMtvK16oVo0RS9doJENLjkjQd2O4w&sheetname=wizzo')
+                                                                            .then(function (response) {
+                                                                                // handle success
+
+                                                                                axios.get('http://'+url+'/automation?metaid=1736&spreadsheetid=1u9fpBU-fTCbLbXIMtvK16oVo0RS9doJENLjkjQd2O4w&sheetname=nosource')
+                                                                                    .then(function (response) {
+                                                                                        // handle success
+                                                                                        console.log("AE LTV - 10 exports ran succesfully at :"+moment().format());
+                                                                                    })
+                                                                                    .catch(function (error) {
+                                                                                        // handle error
+                                                                                        console.log(error);
+                                                                                    });
+                                                                            })
+                                                                            .catch(function (error) {
+                                                                                // handle error
+                                                                                console.log(error);
+                                                                            });
+                                                                    })
+                                                                    .catch(function (error) {
+                                                                        // handle error
+                                                                        console.log(error);
+                                                                    });
+                                                            })
+                                                            .catch(function (error) {
+                                                                // handle error
+                                                                console.log(error);
+                                                            });
+                                                    })
+                                                    .catch(function (error) {
+                                                        // handle error
+                                                        console.log(error);
+                                                    });
+                                            })
+                                            .catch(function (error) {
+                                                // handle error
+                                                console.log(error);
+                                            });
+
+                                    })
+                                    .catch(function (error) {
+                                        // handle error
+                                        console.log(error);
+                                    });
+                            })
+                            .catch(function (error) {
+                                // handle error
+                                console.log(error);
+                            });
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    });
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }, null, true, 'America/Los_Angeles');
+
+
+});
+
+router.get('/metabasecronbh', function(req, res, next) {
+
+    var url = req.headers.host;
+
+    var CronJob = require('cron').CronJob;
+    //new CronJob('00 00 00 * * *', function() {
+    new CronJob('* 15 0 * * *', function() {
+
+        axios.get('http://'+url+'/automation?metaid=1609&spreadsheetid=16zBZ5AmmzicG4BJ2brLtWou_Icx8LpM70FlIej_rt90&sheetname=arabclicks')
+            .then(function (response) {
+                // handle success
+
+                axios.get('http://'+url+'/automation?metaid=1643&spreadsheetid=16zBZ5AmmzicG4BJ2brLtWou_Icx8LpM70FlIej_rt90&sheetname=arabyads')
+                    .then(function (response) {
+                        // handle success
+
+                        axios.get('http://'+url+'/automation?metaid=1652&spreadsheetid=16zBZ5AmmzicG4BJ2brLtWou_Icx8LpM70FlIej_rt90&sheetname=armorads')
+                            .then(function (response) {
+                                // handle success
+
+                                axios.get('http://'+url+'/automation?metaid=1661&spreadsheetid=16zBZ5AmmzicG4BJ2brLtWou_Icx8LpM70FlIej_rt90&sheetname=facebook')
+                                    .then(function (response) {
+                                        // handle success
+
+                                        axios.get('http://'+url+'/automation?metaid=1670&spreadsheetid=16zBZ5AmmzicG4BJ2brLtWou_Icx8LpM70FlIej_rt90&sheetname=google')
+                                            .then(function (response) {
+                                                // handle success
+
+                                                axios.get('http://'+url+'/automation?metaid=1679&spreadsheetid=16zBZ5AmmzicG4BJ2brLtWou_Icx8LpM70FlIej_rt90&sheetname=instagram')
+                                                    .then(function (response) {
+                                                        // handle success
+
+                                                        axios.get('http://'+url+'/automation?metaid=1688&spreadsheetid=16zBZ5AmmzicG4BJ2brLtWou_Icx8LpM70FlIej_rt90&sheetname=netaffiliation')
+                                                            .then(function (response) {
+                                                                // handle success
+
+                                                                axios.get('http://'+url+'/automation?metaid=1697&spreadsheetid=16zBZ5AmmzicG4BJ2brLtWou_Icx8LpM70FlIej_rt90&sheetname=voice')
+                                                                    .then(function (response) {
+                                                                        // handle success
+
+                                                                        axios.get('http://'+url+'/automation?metaid=1706&spreadsheetid=16zBZ5AmmzicG4BJ2brLtWou_Icx8LpM70FlIej_rt90&sheetname=wizzo')
+                                                                            .then(function (response) {
+                                                                                // handle success
+
+                                                                                axios.get('http://'+url+'/automation?metaid=1737&spreadsheetid=16zBZ5AmmzicG4BJ2brLtWou_Icx8LpM70FlIej_rt90&sheetname=nosource')
+                                                                                    .then(function (response) {
+                                                                                        // handle success
+                                                                                        console.log("BH LTV - 10 exports ran succesfully at :"+moment().format());
+                                                                                    })
+                                                                                    .catch(function (error) {
+                                                                                        // handle error
+                                                                                        console.log(error);
+                                                                                    });
+                                                                            })
+                                                                            .catch(function (error) {
+                                                                                // handle error
+                                                                                console.log(error);
+                                                                            });
+                                                                    })
+                                                                    .catch(function (error) {
+                                                                        // handle error
+                                                                        console.log(error);
+                                                                    });
+                                                            })
+                                                            .catch(function (error) {
+                                                                // handle error
+                                                                console.log(error);
+                                                            });
+                                                    })
+                                                    .catch(function (error) {
+                                                        // handle error
+                                                        console.log(error);
+                                                    });
+                                            })
+                                            .catch(function (error) {
+                                                // handle error
+                                                console.log(error);
+                                            });
+
+                                    })
+                                    .catch(function (error) {
+                                        // handle error
+                                        console.log(error);
+                                    });
+                            })
+                            .catch(function (error) {
+                                // handle error
+                                console.log(error);
+                            });
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    });
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+
+    }, null, true, 'America/Los_Angeles');
+
+
+});
+
+router.get('/metabasecroniq', function(req, res, next) {
+
+    var url = req.headers.host;
+
+    var CronJob = require('cron').CronJob;
+    //new CronJob('00 00 00 * * *', function() {
+    new CronJob('* 20 0 * * *', function() {
+
+        axios.get('http://'+url+'/automation?metaid=1640&spreadsheetid=1mtjKsr617kk4HgWeYGDEu4nAu426yac6NUzLSppiteY&sheetname=arabclicks')
+            .then(function (response) {
+                // handle success
+
+                axios.get('http://'+url+'/automation?metaid=1649&spreadsheetid=1mtjKsr617kk4HgWeYGDEu4nAu426yac6NUzLSppiteY&sheetname=arabyads')
+                    .then(function (response) {
+                        // handle success
+
+                        axios.get('http://'+url+'/automation?metaid=1658&spreadsheetid=1mtjKsr617kk4HgWeYGDEu4nAu426yac6NUzLSppiteY&sheetname=armorads')
+                            .then(function (response) {
+                                // handle success
+
+                                axios.get('http://'+url+'/automation?metaid=1667&spreadsheetid=1mtjKsr617kk4HgWeYGDEu4nAu426yac6NUzLSppiteY&sheetname=facebook')
+                                    .then(function (response) {
+                                        // handle success
+
+                                        axios.get('http://'+url+'/automation?metaid=1676&spreadsheetid=1mtjKsr617kk4HgWeYGDEu4nAu426yac6NUzLSppiteY&sheetname=google')
+                                            .then(function (response) {
+                                                // handle success
+
+                                                axios.get('http://'+url+'/automation?metaid=1685&spreadsheetid=1mtjKsr617kk4HgWeYGDEu4nAu426yac6NUzLSppiteY&sheetname=instagram')
+                                                    .then(function (response) {
+                                                        // handle success
+
+                                                        axios.get('http://'+url+'/automation?metaid=1694&spreadsheetid=1mtjKsr617kk4HgWeYGDEu4nAu426yac6NUzLSppiteY&sheetname=netaffiliation')
+                                                            .then(function (response) {
+                                                                // handle success
+
+                                                                axios.get('http://'+url+'/automation?metaid=1703&spreadsheetid=1mtjKsr617kk4HgWeYGDEu4nAu426yac6NUzLSppiteY&sheetname=voice')
+                                                                    .then(function (response) {
+                                                                        // handle success
+
+                                                                        axios.get('http://'+url+'/automation?metaid=1712&spreadsheetid=1mtjKsr617kk4HgWeYGDEu4nAu426yac6NUzLSppiteY&sheetname=wizzo')
+                                                                            .then(function (response) {
+                                                                                // handle success
+
+                                                                                axios.get('http://'+url+'/automation?metaid=1743&spreadsheetid=1mtjKsr617kk4HgWeYGDEu4nAu426yac6NUzLSppiteY&sheetname=nosource')
+                                                                                    .then(function (response) {
+                                                                                        // handle success
+                                                                                        console.log("IQ LTV - 10 exports ran succesfully at :"+moment().format());
+                                                                                    })
+                                                                                    .catch(function (error) {
+                                                                                        // handle error
+                                                                                        console.log(error);
+                                                                                    });
+                                                                            })
+                                                                            .catch(function (error) {
+                                                                                // handle error
+                                                                                console.log(error);
+                                                                            });
+                                                                    })
+                                                                    .catch(function (error) {
+                                                                        // handle error
+                                                                        console.log(error);
+                                                                    });
+
+                                                            })
+                                                            .catch(function (error) {
+                                                                // handle error
+                                                                console.log(error);
+                                                            });
+                                                    })
+                                                    .catch(function (error) {
+                                                        // handle error
+                                                        console.log(error);
+                                                    });
+                                            })
+                                            .catch(function (error) {
+                                                // handle error
+                                                console.log(error);
+                                            });
+                                    })
+                                    .catch(function (error) {
+                                        // handle error
+                                        console.log(error);
+                                    });
+                            })
+                            .catch(function (error) {
+                                // handle error
+                                console.log(error);
+                            });
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    });
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+
+
+    }, null, true, 'America/Los_Angeles');
+
+
+});
+
+router.get('/metabasecronjo', function(req, res, next) {
+
+    var url = req.headers.host;
+
+    var CronJob = require('cron').CronJob;
+    //new CronJob('00 00 00 * * *', function() {
+    new CronJob('* 25 0 * * *', function() {
+
+        axios.get('http://'+url+'/automation?metaid=1610&spreadsheetid=13EmU8VUfec-8lC6FpdSFydoJZOsO8JPbSU2YSm5JS04&sheetname=arabclicks')
+            .then(function (response) {
+                // handle success
+
+                axios.get('http://'+url+'/automation?metaid=1644&spreadsheetid=13EmU8VUfec-8lC6FpdSFydoJZOsO8JPbSU2YSm5JS04&sheetname=arabyads')
+                    .then(function (response) {
+                        // handle success
+
+                        axios.get('http://'+url+'/automation?metaid=1653&spreadsheetid=13EmU8VUfec-8lC6FpdSFydoJZOsO8JPbSU2YSm5JS04&sheetname=armorads')
+                            .then(function (response) {
+                                // handle success
+
+                                axios.get('http://'+url+'/automation?metaid=1662&spreadsheetid=13EmU8VUfec-8lC6FpdSFydoJZOsO8JPbSU2YSm5JS04&sheetname=facebook')
+                                    .then(function (response) {
+                                        // handle success
+
+                                        axios.get('http://'+url+'/automation?metaid=1671&spreadsheetid=13EmU8VUfec-8lC6FpdSFydoJZOsO8JPbSU2YSm5JS04&sheetname=google')
+                                            .then(function (response) {
+                                                // handle success
+
+                                                axios.get('http://'+url+'/automation?metaid=1680&spreadsheetid=13EmU8VUfec-8lC6FpdSFydoJZOsO8JPbSU2YSm5JS04&sheetname=instagram')
+                                                    .then(function (response) {
+                                                        // handle success
+
+                                                        axios.get('http://'+url+'/automation?metaid=1689&spreadsheetid=13EmU8VUfec-8lC6FpdSFydoJZOsO8JPbSU2YSm5JS04&sheetname=netaffiliation')
+                                                            .then(function (response) {
+                                                                // handle success
+
+                                                                axios.get('http://'+url+'/automation?metaid=1698&spreadsheetid=13EmU8VUfec-8lC6FpdSFydoJZOsO8JPbSU2YSm5JS04&sheetname=voice')
+                                                                    .then(function (response) {
+                                                                        // handle success
+
+                                                                        axios.get('http://'+url+'/automation?metaid=1707&spreadsheetid=13EmU8VUfec-8lC6FpdSFydoJZOsO8JPbSU2YSm5JS04&sheetname=wizzo')
+                                                                            .then(function (response) {
+                                                                                // handle success
+
+                                                                                axios.get('http://'+url+'/automation?metaid=1738&spreadsheetid=13EmU8VUfec-8lC6FpdSFydoJZOsO8JPbSU2YSm5JS04&sheetname=nosource')
+                                                                                    .then(function (response) {
+                                                                                        // handle success
+                                                                                        console.log("JO LTV - 10 exports ran succesfully at :"+moment().format());
+                                                                                    })
+                                                                                    .catch(function (error) {
+                                                                                        // handle error
+                                                                                        console.log(error);
+                                                                                    });
+                                                                            })
+                                                                            .catch(function (error) {
+                                                                                // handle error
+                                                                                console.log(error);
+                                                                            });
+                                                                    })
+                                                                    .catch(function (error) {
+                                                                        // handle error
+                                                                        console.log(error);
+                                                                    });
+                                                            })
+                                                            .catch(function (error) {
+                                                                // handle error
+                                                                console.log(error);
+                                                            });
+                                                    })
+                                                    .catch(function (error) {
+                                                        // handle error
+                                                        console.log(error);
+                                                    });
+                                            })
+                                            .catch(function (error) {
+                                                // handle error
+                                                console.log(error);
+                                            });
+                                    })
+                                    .catch(function (error) {
+                                        // handle error
+                                        console.log(error);
+                                    });
+                            })
+                            .catch(function (error) {
+                                // handle error
+                                console.log(error);
+                            });
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    });
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }, null, true, 'America/Los_Angeles');
+
+
+});
+
+router.get('/metabasecronkw', function(req, res, next) {
+
+    var url = req.headers.host;
+
+    var CronJob = require('cron').CronJob;
+    //new CronJob('00 00 00 * * *', function() {
+    new CronJob('* 30 0 * * *', function() {
+
+        axios.get('http://'+url+'/automation?metaid=1613&spreadsheetid=1BrU9az8JTALQ5kOh2nMe-QAPeSyDGyb3ZIcbKoM_Xqg&sheetname=arabclicks')
+            .then(function (response) {
+                // handle success
+                console.log("1");
+                axios.get('http://'+url+'/automation?metaid=1647&spreadsheetid=1BrU9az8JTALQ5kOh2nMe-QAPeSyDGyb3ZIcbKoM_Xqg&sheetname=arabyads')
+                    .then(function (response) {
+                        // handle success
+                        console.log("2");
+                        axios.get('http://'+url+'/automation?metaid=1656&spreadsheetid=1BrU9az8JTALQ5kOh2nMe-QAPeSyDGyb3ZIcbKoM_Xqg&sheetname=armorads')
+                            .then(function (response) {
+                                // handle success
+                                console.log("3");
+                                axios.get('http://'+url+'/automation?metaid=1665&spreadsheetid=1BrU9az8JTALQ5kOh2nMe-QAPeSyDGyb3ZIcbKoM_Xqg&sheetname=facebook')
+                                    .then(function (response) {
+                                        // handle success
+                                        console.log("4");
+                                        axios.get('http://'+url+'/automation?metaid=1674&spreadsheetid=1BrU9az8JTALQ5kOh2nMe-QAPeSyDGyb3ZIcbKoM_Xqg&sheetname=google')
+                                            .then(function (response) {
+                                                // handle success
+                                                console.log("5");
+                                                axios.get('http://'+url+'/automation?metaid=1683&spreadsheetid=1BrU9az8JTALQ5kOh2nMe-QAPeSyDGyb3ZIcbKoM_Xqg&sheetname=instagram')
+                                                    .then(function (response) {
+                                                        // handle success
+                                                        console.log("6");
+                                                        axios.get('http://'+url+'/automation?metaid=1692&spreadsheetid=1BrU9az8JTALQ5kOh2nMe-QAPeSyDGyb3ZIcbKoM_Xqg&sheetname=netaffiliation')
+                                                            .then(function (response) {
+                                                                // handle success
+                                                                console.log("7");
+                                                                axios.get('http://'+url+'/automation?metaid=1701&spreadsheetid=1BrU9az8JTALQ5kOh2nMe-QAPeSyDGyb3ZIcbKoM_Xqg&sheetname=voice')
+                                                                    .then(function (response) {
+                                                                        // handle success
+                                                                        console.log("8");
+                                                                        axios.get('http://'+url+'/automation?metaid=1710&spreadsheetid=1BrU9az8JTALQ5kOh2nMe-QAPeSyDGyb3ZIcbKoM_Xqg&sheetname=wizzo')
+                                                                            .then(function (response) {
+                                                                                // handle success
+                                                                                console.log("9");
+                                                                                axios.get('http://'+url+'/automation?metaid=1741&spreadsheetid=1BrU9az8JTALQ5kOh2nMe-QAPeSyDGyb3ZIcbKoM_Xqg&sheetname=nosource')
+                                                                                    .then(function (response) {
+                                                                                        // handle success
+                                                                                        console.log("KW LTV - 10 exports ran succesfully at :"+moment().format());
+                                                                                    })
+                                                                                    .catch(function (error) {
+                                                                                        // handle error
+                                                                                        console.log(error);
+                                                                                    });
+                                                                            })
+                                                                            .catch(function (error) {
+                                                                                // handle error
+                                                                                console.log(error);
+                                                                            });
+                                                                    })
+                                                                    .catch(function (error) {
+                                                                        // handle error
+                                                                        console.log(error);
+                                                                    });
+                                                            })
+                                                            .catch(function (error) {
+                                                                // handle error
+                                                                console.log(error);
+                                                            });
+                                                    })
+                                                    .catch(function (error) {
+                                                        // handle error
+                                                        console.log(error);
+                                                    });
+                                            })
+                                            .catch(function (error) {
+                                                // handle error
+                                                console.log(error);
+                                            });
+                                    })
+                                    .catch(function (error) {
+                                        // handle error
+                                        console.log(error);
+                                    });
+                            })
+                            .catch(function (error) {
+                                // handle error
+                                console.log(error);
+                            });
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    });
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+
+    }, null, true, 'America/Los_Angeles');
+
+
+});
+
+router.get('/metabasecronps', function(req, res, next) {
+
+    var url = req.headers.host;
+
+    var CronJob = require('cron').CronJob;
+    //new CronJob('00 00 00 * * *', function() {
+    new CronJob('* 35 0 * * *', function() {
+
+        axios.get('http://'+url+'/automation?metaid=1612&spreadsheetid=1uw8q-L3c5FrSHUsxnO2a1uDTf6riAv2mDmDTOV5xI0M&sheetname=arabclicks')
+            .then(function (response) {
+                // handle success
+                console.log("1");
+                axios.get('http://'+url+'/automation?metaid=1646&spreadsheetid=1uw8q-L3c5FrSHUsxnO2a1uDTf6riAv2mDmDTOV5xI0M&sheetname=arabyads')
+                    .then(function (response) {
+                        // handle success
+                        console.log("2");
+                        axios.get('http://'+url+'/automation?metaid=1655&spreadsheetid=1uw8q-L3c5FrSHUsxnO2a1uDTf6riAv2mDmDTOV5xI0M&sheetname=armorads')
+                            .then(function (response) {
+                                // handle success
+                                console.log("3");
+                                axios.get('http://'+url+'/automation?metaid=1664&spreadsheetid=1uw8q-L3c5FrSHUsxnO2a1uDTf6riAv2mDmDTOV5xI0M&sheetname=facebook')
+                                    .then(function (response) {
+                                        // handle success
+                                        console.log("4");
+                                        axios.get('http://'+url+'/automation?metaid=1673&spreadsheetid=1uw8q-L3c5FrSHUsxnO2a1uDTf6riAv2mDmDTOV5xI0M&sheetname=google')
+                                            .then(function (response) {
+                                                // handle success
+                                                console.log("5");
+                                                axios.get('http://'+url+'/automation?metaid=1682&spreadsheetid=1uw8q-L3c5FrSHUsxnO2a1uDTf6riAv2mDmDTOV5xI0M&sheetname=instagram')
+                                                    .then(function (response) {
+                                                        // handle success
+                                                        console.log("6");
+                                                        axios.get('http://'+url+'/automation?metaid=1691&spreadsheetid=1uw8q-L3c5FrSHUsxnO2a1uDTf6riAv2mDmDTOV5xI0M&sheetname=netaffiliation')
+                                                            .then(function (response) {
+                                                                // handle success
+                                                                console.log("7");
+                                                                axios.get('http://'+url+'/automation?metaid=1700&spreadsheetid=1uw8q-L3c5FrSHUsxnO2a1uDTf6riAv2mDmDTOV5xI0M&sheetname=voice')
+                                                                    .then(function (response) {
+                                                                        // handle success
+                                                                        console.log("8");
+                                                                        axios.get('http://'+url+'/automation?metaid=1709&spreadsheetid=1uw8q-L3c5FrSHUsxnO2a1uDTf6riAv2mDmDTOV5xI0M&sheetname=wizzo')
+                                                                            .then(function (response) {
+                                                                                // handle success
+                                                                                console.log("9");
+                                                                                axios.get('http://'+url+'/automation?metaid=1740&spreadsheetid=1uw8q-L3c5FrSHUsxnO2a1uDTf6riAv2mDmDTOV5xI0M&sheetname=nosource')
+                                                                                    .then(function (response) {
+                                                                                        // handle success
+                                                                                        console.log("PS LTV - 10 exports ran succesfully at :"+moment().format());
+                                                                                    })
+                                                                                    .catch(function (error) {
+                                                                                        // handle error
+                                                                                        console.log(error);
+                                                                                    });
+                                                                            })
+                                                                            .catch(function (error) {
+                                                                                // handle error
+                                                                                console.log(error);
+                                                                            });
+                                                                    })
+                                                                    .catch(function (error) {
+                                                                        // handle error
+                                                                        console.log(error);
+                                                                    });
+                                                            })
+                                                            .catch(function (error) {
+                                                                // handle error
+                                                                console.log(error);
+                                                            });
+                                                    })
+                                                    .catch(function (error) {
+                                                        // handle error
+                                                        console.log(error);
+                                                    });
+                                            })
+                                            .catch(function (error) {
+                                                // handle error
+                                                console.log(error);
+                                            });
+                                    })
+                                    .catch(function (error) {
+                                        // handle error
+                                        console.log(error);
+                                    });
+                            })
+                            .catch(function (error) {
+                                // handle error
+                                console.log(error);
+                            });
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    });
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+
+
+
+    }, null, true, 'America/Los_Angeles');
+
+
+});
+
+router.get('/metabasecronsa', function(req, res, next) {
+
+    var url = req.headers.host;
+
+    var CronJob = require('cron').CronJob;
+    //new CronJob('00 00 00 * * *', function() {
+    new CronJob('* 40 0 * * *', function() {
+
+        axios.get('http://'+url+'/automation?metaid=1639&spreadsheetid=1a06IlUcIDIO9uncgeX9nrcuqvhvx-FM5IqyrDj4Un28&sheetname=arabclicks')
+            .then(function (response) {
+                // handle success
+                console.log("1");
+                axios.get('http://'+url+'/automation?metaid=1648&spreadsheetid=1a06IlUcIDIO9uncgeX9nrcuqvhvx-FM5IqyrDj4Un28&sheetname=arabyads')
+                    .then(function (response) {
+                        // handle success
+                        console.log("2");
+                        axios.get('http://'+url+'/automation?metaid=1657&spreadsheetid=1a06IlUcIDIO9uncgeX9nrcuqvhvx-FM5IqyrDj4Un28&sheetname=armorads')
+                            .then(function (response) {
+                                // handle success
+                                console.log("3");
+                                axios.get('http://'+url+'/automation?metaid=1666&spreadsheetid=1a06IlUcIDIO9uncgeX9nrcuqvhvx-FM5IqyrDj4Un28&sheetname=facebook')
+                                    .then(function (response) {
+                                        // handle success
+                                        console.log("4");
+                                        axios.get('http://'+url+'/automation?metaid=1675&spreadsheetid=1a06IlUcIDIO9uncgeX9nrcuqvhvx-FM5IqyrDj4Un28&sheetname=google')
+                                            .then(function (response) {
+                                                // handle success
+                                                console.log("5");
+                                                axios.get('http://'+url+'/automation?metaid=1684&spreadsheetid=1a06IlUcIDIO9uncgeX9nrcuqvhvx-FM5IqyrDj4Un28&sheetname=instagram')
+                                                    .then(function (response) {
+                                                        // handle success
+                                                        console.log("6");
+                                                        axios.get('http://'+url+'/automation?metaid=1693&spreadsheetid=1a06IlUcIDIO9uncgeX9nrcuqvhvx-FM5IqyrDj4Un28&sheetname=netaffiliation')
+                                                            .then(function (response) {
+                                                                // handle success
+                                                                console.log("7");
+                                                                axios.get('http://'+url+'/automation?metaid=1702&spreadsheetid=1a06IlUcIDIO9uncgeX9nrcuqvhvx-FM5IqyrDj4Un28&sheetname=voice')
+                                                                    .then(function (response) {
+                                                                        // handle success
+                                                                        console.log("8");
+                                                                        axios.get('http://'+url+'/automation?metaid=1711&spreadsheetid=1a06IlUcIDIO9uncgeX9nrcuqvhvx-FM5IqyrDj4Un28&sheetname=wizzo')
+                                                                            .then(function (response) {
+                                                                                // handle success
+                                                                                console.log("9");
+                                                                                axios.get('http://'+url+'/automation?metaid=1742&spreadsheetid=1a06IlUcIDIO9uncgeX9nrcuqvhvx-FM5IqyrDj4Un28&sheetname=nosource')
+                                                                                    .then(function (response) {
+                                                                                        // handle success
+                                                                                        console.log("SA LTV - 10 exports ran succesfully at :"+moment().format());
+                                                                                    })
+                                                                                    .catch(function (error) {
+                                                                                        // handle error
+                                                                                        console.log(error);
+                                                                                    });
+
+                                                                            })
+                                                                            .catch(function (error) {
+                                                                                // handle error
+                                                                                console.log(error);
+                                                                            });
+                                                                    })
+                                                                    .catch(function (error) {
+                                                                        // handle error
+                                                                        console.log(error);
+                                                                    });
+                                                            })
+                                                            .catch(function (error) {
+                                                                // handle error
+                                                                console.log(error);
+                                                            });
+                                                    })
+                                                    .catch(function (error) {
+                                                        // handle error
+                                                        console.log(error);
+                                                    });
+                                            })
+                                            .catch(function (error) {
+                                                // handle error
+                                                console.log(error);
+                                            });
+                                    })
+                                    .catch(function (error) {
+                                        // handle error
+                                        console.log(error);
+                                    });
+
+                            })
+                            .catch(function (error) {
+                                // handle error
+                                console.log(error);
+                            });
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    });
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+
+    }, null, true, 'America/Los_Angeles');
+
+
+});
+
+router.get('/metabasecrontn', function(req, res, next) {
+
+    var url = req.headers.host;
+
+    var CronJob = require('cron').CronJob;
+    //new CronJob('00 00 00 * * *', function() {
+    new CronJob('* 45 0 * * *', function() {
+
+        axios.get('http://'+url+'/automation?metaid=1611&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=arabclicks')
+            .then(function (response) {
+                // handle success
+
+                axios.get('http://'+url+'/automation?metaid=1645&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=arabyads')
+                    .then(function (response) {
+                        // handle success
+                        console.log("1");
+                        axios.get('http://'+url+'/automation?metaid=1645&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=arabyads')
+                            .then(function (response) {
+                                // handle success
+                                console.log("2");
+                                axios.get('http://'+url+'/automation?metaid=1654&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=armorads')
+                                    .then(function (response) {
+                                        // handle success
+                                        console.log("3");
+                                        axios.get('http://'+url+'/automation?metaid=1663&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=facebook')
+                                            .then(function (response) {
+                                                // handle success
+                                                console.log("4");
+                                                axios.get('http://'+url+'/automation?metaid=1672&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=google')
+                                                    .then(function (response) {
+                                                        // handle success
+                                                        console.log("5");
+                                                        axios.get('http://'+url+'/automation?metaid=1681&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=instagram')
+                                                            .then(function (response) {
+                                                                // handle success
+                                                                console.log("6");
+                                                                axios.get('http://'+url+'/automation?metaid=1690&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=netaffiliation')
+                                                                    .then(function (response) {
+                                                                        // handle success
+                                                                        console.log("7");
+                                                                        axios.get('http://'+url+'/automation?metaid=1699&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=voice')
+                                                                            .then(function (response) {
+                                                                                // handle success
+                                                                                console.log("8");
+                                                                                axios.get('http://'+url+'/automation?metaid=1708&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=wizzo')
+                                                                                    .then(function (response) {
+                                                                                        // handle success
+                                                                                        console.log("9");
+                                                                                        axios.get('http://'+url+'/automation?metaid=1739&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=nosource')
+                                                                                            .then(function (response) {
+                                                                                                // handle success
+                                                                                                console.log("TN LTV - 10 exports ran succesfully at :"+moment().format());
+                                                                                            })
+                                                                                            .catch(function (error) {
+                                                                                                // handle error
+                                                                                                console.log(error);
+                                                                                                res.send('ERROR');                                                                                            });
+                                                                                    })
+                                                                                    .catch(function (error) {
+                                                                                        // handle error
+                                                                                        console.log(error);
+                                                                                        res.send('ERROR');
+                                                                                    });
+                                                                            })
+                                                                            .catch(function (error) {
+                                                                                // handle error
+                                                                                console.log(error);
+                                                                                res.send('ERROR');
+                                                                            });
+                                                                    })
+                                                                    .catch(function (error) {
+                                                                        // handle error
+                                                                        console.log(error);
+                                                                        res.send('ERROR');
+                                                                    });
+                                                            })
+                                                            .catch(function (error) {
+                                                                // handle error
+                                                                console.log(error);
+                                                                res.send('ERROR');
+                                                            });
+                                                    })
+                                                    .catch(function (error) {
+                                                        // handle error
+                                                        console.log(error);
+                                                        res.send('ERROR');
+                                                    });
+                                            })
+                                            .catch(function (error) {
+                                                // handle error
+                                                console.log(error);
+                                                res.send('ERROR');
+                                            });
+                                    })
+                                    .catch(function (error) {
+                                        // handle error
+                                        console.log(error);
+                                        res.send('ERROR');
+                                    });
+                            })
+                            .catch(function (error) {
+                                // handle error
+                                console.log(error);
+                                res.send('ERROR');
+                            });
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        res.send('ERROR');
+                        console.log(error);
+                    });
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+                res.send('ERROR');
             });
 
     }, null, true, 'America/Los_Angeles');
