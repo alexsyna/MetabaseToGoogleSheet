@@ -197,8 +197,7 @@ router.get('/automation', function(req, res, next) {
 
 
 router.get('/metabasecron', function(req, res, next) {
-    var url = request.headers.host;
-
+    var url = req.headers.host;
 
     var CronJob = require('cron').CronJob;
     //new CronJob('00 00 00 * * *', function() {
@@ -252,7 +251,6 @@ router.get('/metabasecron', function(req, res, next) {
 
 
 });
-
 
 router.get('/metabasecroneg', function(req, res, next) {
 
