@@ -193,11 +193,10 @@ router.get('/metabasecron', function(req, res, next) {
 
 
     var CronJob = require('cron').CronJob;
-    new CronJob('00 00 00 * * *', function() {
+    //new CronJob('00 00 00 * * *', function() {
+    new CronJob('* * * * * *', function() {
 
-
-
-        axios.get('http://localhost:3000/automation?metaid=244&spreadsheetid=1oF0UdFHSZVMPKfbtjoHnWCj7FrD_zC0lQq3IkLBSdWI&sheetname=Sheet1')
+        axios.get('http://localhost:3000/automation?metaid=133&spreadsheetid=1AZYEgYISOznG6A7DUUG6fnTGXKre8P9o3hNBKFjsO6A&sheetname=RevenuesPerDate')
             .then(function (response) {
                 // handle success
                 console.log(response);
@@ -207,7 +206,8 @@ router.get('/metabasecron', function(req, res, next) {
                 console.log(error);
             });
 
-        axios.get('http://localhost:3000/automation?metaid=240&spreadsheetid=1oF0UdFHSZVMPKfbtjoHnWCj7FrD_zC0lQq3IkLBSdWI&sheetname=Sheet2')
+
+        axios.get('http://localhost:3000/automation?metaid=135&spreadsheetid=1AZYEgYISOznG6A7DUUG6fnTGXKre8P9o3hNBKFjsO6A&sheetname=RevenuesPerFirstSubDate')
             .then(function (response) {
                 // handle success
                 console.log(response);
@@ -216,14 +216,153 @@ router.get('/metabasecron', function(req, res, next) {
                 // handle error
                 console.log(error);
             });
+
+
+        axios.get('http://localhost:3000/automation?metaid=134&spreadsheetid=1AZYEgYISOznG6A7DUUG6fnTGXKre8P9o3hNBKFjsO6A&sheetname=Subscribers')
+            .then(function (response) {
+                // handle success
+                console.log(response);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+
+
+        axios.get('http://localhost:3000/automation?metaid=142&spreadsheetid=1AZYEgYISOznG6A7DUUG6fnTGXKre8P9o3hNBKFjsO6A&sheetname=UnSubscribers')
+            .then(function (response) {
+                // handle success
+                console.log(response);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+
 
     }, null, true, 'America/Los_Angeles');
 
 
+});
 
 
+router.get('/metabasecroneg', function(req, res, next) {
+
+
+    var CronJob = require('cron').CronJob;
+    //new CronJob('00 00 00 * * *', function() {
+    new CronJob('* * * * * *', function() {
+
+        axios.get('http://localhost:3000/automation?metaid=1607&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=arabclicks')
+            .then(function (response) {
+                // handle success
+                console.log(response);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+
+
+        axios.get('http://localhost:3000/automation?metaid=1641&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=arabyads')
+            .then(function (response) {
+                // handle success
+                console.log(response);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+
+
+        axios.get('http://localhost:3000/automation?metaid=1650&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=armorads')
+            .then(function (response) {
+                // handle success
+                console.log(response);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+
+        axios.get('http://localhost:3000/automation?metaid=1659&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=facebook')
+            .then(function (response) {
+                // handle success
+                console.log(response);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+
+        axios.get('http://localhost:3000/automation?metaid=1668&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=google')
+            .then(function (response) {
+                // handle success
+                console.log(response);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+
+        axios.get('http://localhost:3000/automation?metaid=1677&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=instagram')
+            .then(function (response) {
+                // handle success
+                console.log(response);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+
+        axios.get('http://localhost:3000/automation?metaid=1686&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=netaffiliation')
+            .then(function (response) {
+                // handle success
+                console.log(response);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+
+
+        axios.get('http://localhost:3000/automation?metaid=1695&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=voice')
+            .then(function (response) {
+                // handle success
+                console.log(response);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+
+        axios.get('http://localhost:3000/automation?metaid=1704&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=wizzo')
+            .then(function (response) {
+                // handle success
+                console.log(response);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+
+        axios.get('http://localhost:3000/automation?metaid=1735&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=nosource')
+            .then(function (response) {
+                // handle success
+                console.log(response);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+
+
+    }, null, true, 'America/Los_Angeles');
 
 
 });
+
+
+
 
 module.exports = router;
