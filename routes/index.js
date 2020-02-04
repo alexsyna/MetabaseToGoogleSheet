@@ -1191,111 +1191,107 @@ router.get('/metabasecrontn', function(req, res, next) {
 
     var CronJob = require('cron').CronJob;
     //new CronJob('00 00 00 * * *', function() {
-    new CronJob('* 20 * * * *', function() {
+    new CronJob('* 30 * * * *', function() {
 
         axios.get('http://'+url+'/automation?metaid=1611&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=arabclicks')
             .then(function (response) {
                 // handle success
                 console.log(response);
+                axios.get('http://'+url+'/automation?metaid=1645&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=arabyads')
+                    .then(function (response) {
+                        // handle success
+                        console.log(response);
+                        axios.get('http://'+url+'/automation?metaid=1645&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=arabyads')
+                            .then(function (response) {
+                                // handle success
+                                console.log(response);
+                                axios.get('http://'+url+'/automation?metaid=1654&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=armorads')
+                                    .then(function (response) {
+                                        // handle success
+                                        console.log(response);
+                                        axios.get('http://'+url+'/automation?metaid=1663&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=facebook')
+                                            .then(function (response) {
+                                                // handle success
+                                                console.log(response);
+                                                axios.get('http://'+url+'/automation?metaid=1672&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=google')
+                                                    .then(function (response) {
+                                                        // handle success
+                                                        console.log(response);
+                                                        axios.get('http://'+url+'/automation?metaid=1681&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=instagram')
+                                                            .then(function (response) {
+                                                                // handle success
+                                                                console.log(response);
+                                                                axios.get('http://'+url+'/automation?metaid=1690&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=netaffiliation')
+                                                                    .then(function (response) {
+                                                                        // handle success
+                                                                        console.log(response);
+                                                                        axios.get('http://'+url+'/automation?metaid=1699&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=voice')
+                                                                            .then(function (response) {
+                                                                                // handle success
+                                                                                console.log(response);
+                                                                                axios.get('http://'+url+'/automation?metaid=1708&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=wizzo')
+                                                                                    .then(function (response) {
+                                                                                        // handle success
+                                                                                        console.log(response);
+                                                                                        axios.get('http://'+url+'/automation?metaid=1739&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=nosource')
+                                                                                            .then(function (response) {
+                                                                                                // handle success
+                                                                                                console.log(response);
+                                                                                            })
+                                                                                            .catch(function (error) {
+                                                                                                // handle error
+                                                                                                console.log(error);
+                                                                                                res.send('OK');                                                                                            });
+                                                                                    })
+                                                                                    .catch(function (error) {
+                                                                                        // handle error
+                                                                                        console.log(error);
+                                                                                    });
+                                                                            })
+                                                                            .catch(function (error) {
+                                                                                // handle error
+                                                                                console.log(error);
+                                                                            });
+                                                                    })
+                                                                    .catch(function (error) {
+                                                                        // handle error
+                                                                        console.log(error);
+                                                                    });
+                                                            })
+                                                            .catch(function (error) {
+                                                                // handle error
+                                                                console.log(error);
+                                                            });
+                                                    })
+                                                    .catch(function (error) {
+                                                        // handle error
+                                                        console.log(error);
+                                                    });
+                                            })
+                                            .catch(function (error) {
+                                                // handle error
+                                                console.log(error);
+                                            });
+                                    })
+                                    .catch(function (error) {
+                                        // handle error
+                                        console.log(error);
+                                    });
+                            })
+                            .catch(function (error) {
+                                // handle error
+                                console.log(error);
+                            });
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    });
             })
             .catch(function (error) {
                 // handle error
                 console.log(error);
             });
-
-
-        axios.get('http://'+url+'/automation?metaid=1645&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=arabyads')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-        axios.get('http://'+url+'/automation?metaid=1654&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=armorads')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1663&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=facebook')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1672&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=google')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1681&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=instagram')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1690&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=netaffiliation')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-
-        axios.get('http://'+url+'/automation?metaid=1699&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=voice')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1708&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=wizzo')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-        axios.get('http://'+url+'/automation?metaid=1739&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=nosource')
-            .then(function (response) {
-                // handle success
-                console.log(response);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
 
     }, null, true, 'America/Los_Angeles');
 
