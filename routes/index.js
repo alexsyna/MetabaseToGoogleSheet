@@ -1,7 +1,10 @@
 var express = require('express');
 var router = express.Router();
+/*
 const { Curl } = require('node-libcurl');
+
 const querystring = require('querystring');
+*/
 const axios = require('axios')
 const {google} = require('googleapis');
 var sheets = google.sheets('v4');
