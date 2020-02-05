@@ -204,7 +204,7 @@ router.get('/metabasecron', function(req, res, next) {
 
     var CronJob = require('cron').CronJob;
     //new CronJob('00 00 00 * * *', function() {
-    var job = new CronJob('* 0 16 * * *', function() {
+    var job = new CronJob('* 1 * * * *', function() {
 
         axios.get('http://'+url+'/automation?metaid=133&spreadsheetid=1AZYEgYISOznG6A7DUUG6fnTGXKre8P9o3hNBKFjsO6A&sheetname=RevenuesPerDate')
             .then(function (response) {
