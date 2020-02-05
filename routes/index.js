@@ -162,10 +162,9 @@ router.get('/automation', function(req, res, next) {
                                         res.send('ERROR in update');
                                         console.log(err);
                                     } else {
-                                        res.send('OK delete-update');
+                                        res.end('OK delete-update');
                                         console.log(`Cells updated in sheet:` + spreadsheetId +' with metabase id:' + metaid);
                                         console.log('==================');
-
                                     }
                                 });
                             }
@@ -204,7 +203,7 @@ router.get('/metabasecron', function(req, res, next) {
 
     var CronJob = require('cron').CronJob;
     //new CronJob('00 00 00 * * *', function() {
-    var job = new CronJob('* */1 * * * *', function() {
+    new CronJob('01 00 00 * * *', function() {
 
         axios.get('http://'+url+'/automation?metaid=133&spreadsheetid=1AZYEgYISOznG6A7DUUG6fnTGXKre8P9o3hNBKFjsO6A&sheetname=RevenuesPerDate')
             .then(function (response) {
@@ -222,38 +221,30 @@ router.get('/metabasecron', function(req, res, next) {
                                     })
                                     .catch(function (error) {
                                         // handle error
-                                        console.log(error);
+                                        res.send(error) ; console.log(error);
                                     });
                             })
                             .catch(function (error) {
                                 // handle error
-                                console.log(error);
+                                res.send(error) ; console.log(error);
                             });
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
+                        res.send(error) ; console.log(error);
                     });
             })
             .catch(function (error) {
                 // handle error
-                console.log(error);
+                res.send(error) ; console.log(error);
             });
 
-
-
-
-
-
-
-
-
-
-
     }, null, true, 'America/Los_Angeles');
-    job.start();
 
-    res.send('OK first');
+
+    res.send('OK');
+
+
 
 
 });
@@ -264,7 +255,7 @@ router.get('/metabasecroneg', function(req, res, next) {
 
     var CronJob = require('cron').CronJob;
     //new CronJob('00 00 00 * * *', function() {
-    var job = new CronJob('* 5 16 * * *', function() {
+    var job = new CronJob('01 05 00 * * *', function() {
 
         axios.get('http://'+url+'/automation?metaid=1607&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=arabclicks')
             .then(function (response) {
@@ -309,62 +300,60 @@ router.get('/metabasecroneg', function(req, res, next) {
                                                                                     })
                                                                                     .catch(function (error) {
                                                                                         // handle error
-                                                                                        console.log(error);
+                                                                                        res.send(error) ; console.log(error);
                                                                                     });
                                                                             })
                                                                             .catch(function (error) {
                                                                                 // handle error
-                                                                                console.log(error);
+                                                                                res.send(error) ; console.log(error);
                                                                             });
                                                                     })
                                                                     .catch(function (error) {
                                                                         // handle error
-                                                                        console.log(error);
+                                                                        res.send(error) ; console.log(error);
                                                                     });
                                                             })
                                                             .catch(function (error) {
                                                                 // handle error
-                                                                console.log(error);
+                                                                res.send(error) ; console.log(error);
                                                             });
                                                     })
                                                     .catch(function (error) {
                                                         // handle error
-                                                        console.log(error);
+                                                        res.send(error) ; console.log(error);
                                                     });
                                             })
                                             .catch(function (error) {
                                                 // handle error
-                                                console.log(error);
+                                                res.send(error) ; console.log(error);
                                             });
                                     })
                                     .catch(function (error) {
                                         // handle error
-                                        console.log(error);
+                                        res.send(error) ; console.log(error);
                                     });
                             })
                             .catch(function (error) {
                                 // handle error
-                                console.log(error);
+                                res.send(error) ; console.log(error);
                             });
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
+                        res.send(error) ; console.log(error);
                     });
             })
             .catch(function (error) {
                 // handle error
-                console.log(error);
+                res.send(error) ; console.log(error);
             });
 
 
 
 
     }, null, true, 'America/Los_Angeles');
-    job.start();
 
-    res.send('OK first');
-
+    res.send('OK');
 });
 
 router.get('/metabasecronae', function(req, res, next) {
@@ -373,7 +362,7 @@ router.get('/metabasecronae', function(req, res, next) {
 
     var CronJob = require('cron').CronJob;
     //new CronJob('00 00 00 * * *', function() {
-    var job = new CronJob('* 10 16 * * *', function() {
+    new CronJob('01 10 00 * * *', function() {
 
         axios.get('http://'+url+'/automation?metaid=1608&spreadsheetid=1u9fpBU-fTCbLbXIMtvK16oVo0RS9doJENLjkjQd2O4w&sheetname=arabclicks')
             .then(function (response) {
@@ -418,82 +407,60 @@ router.get('/metabasecronae', function(req, res, next) {
                                                                                     })
                                                                                     .catch(function (error) {
                                                                                         // handle error
-                                                                                        console.log(error);
+                                                                                        res.send(error) ; console.log(error);
                                                                                     });
                                                                             })
                                                                             .catch(function (error) {
                                                                                 // handle error
-                                                                                console.log(error);
+                                                                                res.send(error) ; console.log(error);
                                                                             });
                                                                     })
                                                                     .catch(function (error) {
                                                                         // handle error
-                                                                        console.log(error);
+                                                                        res.send(error) ; console.log(error);
                                                                     });
                                                             })
                                                             .catch(function (error) {
                                                                 // handle error
-                                                                console.log(error);
+                                                                res.send(error) ; console.log(error);
                                                             });
                                                     })
                                                     .catch(function (error) {
                                                         // handle error
-                                                        console.log(error);
+                                                        res.send(error) ; console.log(error);
                                                     });
                                             })
                                             .catch(function (error) {
                                                 // handle error
-                                                console.log(error);
+                                                res.send(error) ; console.log(error);
                                             });
 
                                     })
                                     .catch(function (error) {
                                         // handle error
-                                        console.log(error);
+                                        res.send(error) ; console.log(error);
                                     });
                             })
                             .catch(function (error) {
                                 // handle error
-                                console.log(error);
+                                res.send(error) ; console.log(error);
                             });
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
+                        res.send(error) ; console.log(error);
                     });
             })
             .catch(function (error) {
                 // handle error
-                console.log(error);
+                res.send(error) ; console.log(error);
             });
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }, null, true, 'America/Los_Angeles');
-    job.start();
 
-    res.send('OK first');
-
+    res.send('OK');
 });
 
 router.get('/metabasecronbh', function(req, res, next) {
@@ -502,7 +469,7 @@ router.get('/metabasecronbh', function(req, res, next) {
 
     var CronJob = require('cron').CronJob;
     //new CronJob('00 00 00 * * *', function() {
-    var job = new CronJob('* 15 16 * * *', function() {
+    new CronJob('01 15 00 * * *', function() {
 
         axios.get('http://'+url+'/automation?metaid=1609&spreadsheetid=16zBZ5AmmzicG4BJ2brLtWou_Icx8LpM70FlIej_rt90&sheetname=arabclicks')
             .then(function (response) {
@@ -547,59 +514,58 @@ router.get('/metabasecronbh', function(req, res, next) {
                                                                                     })
                                                                                     .catch(function (error) {
                                                                                         // handle error
-                                                                                        console.log(error);
+                                                                                        res.send(error) ; console.log(error);
                                                                                     });
                                                                             })
                                                                             .catch(function (error) {
                                                                                 // handle error
-                                                                                console.log(error);
+                                                                                res.send(error) ; console.log(error);
                                                                             });
                                                                     })
                                                                     .catch(function (error) {
                                                                         // handle error
-                                                                        console.log(error);
+                                                                        res.send(error) ; console.log(error);
                                                                     });
                                                             })
                                                             .catch(function (error) {
                                                                 // handle error
-                                                                console.log(error);
+                                                                res.send(error) ; console.log(error);
                                                             });
                                                     })
                                                     .catch(function (error) {
                                                         // handle error
-                                                        console.log(error);
+                                                        res.send(error) ; console.log(error);
                                                     });
                                             })
                                             .catch(function (error) {
                                                 // handle error
-                                                console.log(error);
+                                                res.send(error) ; console.log(error);
                                             });
 
                                     })
                                     .catch(function (error) {
                                         // handle error
-                                        console.log(error);
+                                        res.send(error) ; console.log(error);
                                     });
                             })
                             .catch(function (error) {
                                 // handle error
-                                console.log(error);
+                                res.send(error) ; console.log(error);
                             });
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
+                        res.send(error) ; console.log(error);
                     });
             })
             .catch(function (error) {
                 // handle error
-                console.log(error);
+                res.send(error) ; console.log(error);
             });
 
     }, null, true, 'America/Los_Angeles');
-    job.start();
 
-    res.send('OK first');
+    res.send('OK');
 
 });
 
@@ -609,7 +575,7 @@ router.get('/metabasecroniq', function(req, res, next) {
 
     var CronJob = require('cron').CronJob;
     //new CronJob('00 00 00 * * *', function() {
-    var job = new CronJob('* 20 16 * * *', function() {
+    new CronJob('01 20 00 * * *', function() {
 
         axios.get('http://'+url+'/automation?metaid=1640&spreadsheetid=1mtjKsr617kk4HgWeYGDEu4nAu426yac6NUzLSppiteY&sheetname=arabclicks')
             .then(function (response) {
@@ -654,58 +620,58 @@ router.get('/metabasecroniq', function(req, res, next) {
                                                                                     })
                                                                                     .catch(function (error) {
                                                                                         // handle error
-                                                                                        console.log(error);
+                                                                                        res.send(error) ; console.log(error);
                                                                                     });
                                                                             })
                                                                             .catch(function (error) {
                                                                                 // handle error
-                                                                                console.log(error);
+                                                                                res.send(error) ; console.log(error);
                                                                             });
                                                                     })
                                                                     .catch(function (error) {
                                                                         // handle error
-                                                                        console.log(error);
+                                                                        res.send(error) ; console.log(error);
                                                                     });
 
                                                             })
                                                             .catch(function (error) {
                                                                 // handle error
-                                                                console.log(error);
+                                                                res.send(error) ; console.log(error);
                                                             });
                                                     })
                                                     .catch(function (error) {
                                                         // handle error
-                                                        console.log(error);
+                                                        res.send(error) ; console.log(error);
                                                     });
                                             })
                                             .catch(function (error) {
                                                 // handle error
-                                                console.log(error);
+                                                res.send(error) ; console.log(error);
                                             });
                                     })
                                     .catch(function (error) {
                                         // handle error
-                                        console.log(error);
+                                        res.send(error) ; console.log(error);
                                     });
                             })
                             .catch(function (error) {
                                 // handle error
-                                console.log(error);
+                                res.send(error) ; console.log(error);
                             });
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
+                        res.send(error) ; console.log(error);
                     });
             })
             .catch(function (error) {
                 // handle error
-                console.log(error);
+                res.send(error) ; console.log(error);
             });
 
 
     }, null, true, 'America/Los_Angeles');
-    job.start();
+
 
     res.send('OK first');
 
@@ -717,7 +683,7 @@ router.get('/metabasecronjo', function(req, res, next) {
 
     var CronJob = require('cron').CronJob;
     //new CronJob('00 00 00 * * *', function() {
-    var job = new CronJob('* 25 16 * * *', function() {
+    new CronJob('01 25 00 * * *', function() {
 
         axios.get('http://'+url+'/automation?metaid=1610&spreadsheetid=13EmU8VUfec-8lC6FpdSFydoJZOsO8JPbSU2YSm5JS04&sheetname=arabclicks')
             .then(function (response) {
@@ -762,52 +728,52 @@ router.get('/metabasecronjo', function(req, res, next) {
                                                                                     })
                                                                                     .catch(function (error) {
                                                                                         // handle error
-                                                                                        console.log(error);
+                                                                                        res.send(error) ; console.log(error);
                                                                                     });
                                                                             })
                                                                             .catch(function (error) {
                                                                                 // handle error
-                                                                                console.log(error);
+                                                                                res.send(error) ; console.log(error);
                                                                             });
                                                                     })
                                                                     .catch(function (error) {
                                                                         // handle error
-                                                                        console.log(error);
+                                                                        res.send(error) ; console.log(error);
                                                                     });
                                                             })
                                                             .catch(function (error) {
                                                                 // handle error
-                                                                console.log(error);
+                                                                res.send(error) ; console.log(error);
                                                             });
                                                     })
                                                     .catch(function (error) {
                                                         // handle error
-                                                        console.log(error);
+                                                        res.send(error) ; console.log(error);
                                                     });
                                             })
                                             .catch(function (error) {
                                                 // handle error
-                                                console.log(error);
+                                                res.send(error) ; console.log(error);
                                             });
                                     })
                                     .catch(function (error) {
                                         // handle error
-                                        console.log(error);
+                                        res.send(error) ; console.log(error);
                                     });
                             })
                             .catch(function (error) {
                                 // handle error
-                                console.log(error);
+                                res.send(error) ; console.log(error);
                             });
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
+                        res.send(error) ; console.log(error);
                     });
             })
             .catch(function (error) {
                 // handle error
-                console.log(error);
+                res.send(error) ; console.log(error);
             });
 
 
@@ -833,7 +799,7 @@ router.get('/metabasecronjo', function(req, res, next) {
 
 
     }, null, true, 'America/Los_Angeles');
-    job.start();
+
 
     res.send('OK first');
 
@@ -845,7 +811,7 @@ router.get('/metabasecronkw', function(req, res, next) {
 
     var CronJob = require('cron').CronJob;
     //new CronJob('00 00 00 * * *', function() {
-    var job = new CronJob('* 30 16 * * *', function() {
+    new CronJob('01 30 00 * * *', function() {
 
         axios.get('http://'+url+'/automation?metaid=1613&spreadsheetid=1BrU9az8JTALQ5kOh2nMe-QAPeSyDGyb3ZIcbKoM_Xqg&sheetname=arabclicks')
             .then(function (response) {
@@ -890,56 +856,56 @@ router.get('/metabasecronkw', function(req, res, next) {
                                                                                     })
                                                                                     .catch(function (error) {
                                                                                         // handle error
-                                                                                        console.log(error);
+                                                                                        res.send(error) ; console.log(error);
                                                                                     });
                                                                             })
                                                                             .catch(function (error) {
                                                                                 // handle error
-                                                                                console.log(error);
+                                                                                res.send(error) ; console.log(error);
                                                                             });
                                                                     })
                                                                     .catch(function (error) {
                                                                         // handle error
-                                                                        console.log(error);
+                                                                        res.send(error) ; console.log(error);
                                                                     });
                                                             })
                                                             .catch(function (error) {
                                                                 // handle error
-                                                                console.log(error);
+                                                                res.send(error) ; console.log(error);
                                                             });
                                                     })
                                                     .catch(function (error) {
                                                         // handle error
-                                                        console.log(error);
+                                                        res.send(error) ; console.log(error);
                                                     });
                                             })
                                             .catch(function (error) {
                                                 // handle error
-                                                console.log(error);
+                                                res.send(error) ; console.log(error);
                                             });
                                     })
                                     .catch(function (error) {
                                         // handle error
-                                        console.log(error);
+                                        res.send(error) ; console.log(error);
                                     });
                             })
                             .catch(function (error) {
                                 // handle error
-                                console.log(error);
+                                res.send(error) ; console.log(error);
                             });
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
+                        res.send(error) ; console.log(error);
                     });
             })
             .catch(function (error) {
                 // handle error
-                console.log(error);
+                res.send(error) ; console.log(error);
             });
 
     }, null, true, 'America/Los_Angeles');
-    job.start();
+
 
     res.send('OK first');
 
@@ -951,7 +917,7 @@ router.get('/metabasecronps', function(req, res, next) {
 
     var CronJob = require('cron').CronJob;
     //new CronJob('00 00 00 * * *', function() {
-    var job = new CronJob('* 35 16 * * *', function() {
+    new CronJob('01 35 00 * * *', function() {
 
         axios.get('http://'+url+'/automation?metaid=1612&spreadsheetid=1uw8q-L3c5FrSHUsxnO2a1uDTf6riAv2mDmDTOV5xI0M&sheetname=arabclicks')
             .then(function (response) {
@@ -996,58 +962,58 @@ router.get('/metabasecronps', function(req, res, next) {
                                                                                     })
                                                                                     .catch(function (error) {
                                                                                         // handle error
-                                                                                        console.log(error);
+                                                                                        res.send(error) ; console.log(error);
                                                                                     });
                                                                             })
                                                                             .catch(function (error) {
                                                                                 // handle error
-                                                                                console.log(error);
+                                                                                res.send(error) ; console.log(error);
                                                                             });
                                                                     })
                                                                     .catch(function (error) {
                                                                         // handle error
-                                                                        console.log(error);
+                                                                        res.send(error) ; console.log(error);
                                                                     });
                                                             })
                                                             .catch(function (error) {
                                                                 // handle error
-                                                                console.log(error);
+                                                                res.send(error) ; console.log(error);
                                                             });
                                                     })
                                                     .catch(function (error) {
                                                         // handle error
-                                                        console.log(error);
+                                                        res.send(error) ; console.log(error);
                                                     });
                                             })
                                             .catch(function (error) {
                                                 // handle error
-                                                console.log(error);
+                                                res.send(error) ; console.log(error);
                                             });
                                     })
                                     .catch(function (error) {
                                         // handle error
-                                        console.log(error);
+                                        res.send(error) ; console.log(error);
                                     });
                             })
                             .catch(function (error) {
                                 // handle error
-                                console.log(error);
+                                res.send(error) ; console.log(error);
                             });
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
+                        res.send(error) ; console.log(error);
                     });
             })
             .catch(function (error) {
                 // handle error
-                console.log(error);
+                res.send(error) ; console.log(error);
             });
 
 
 
     }, null, true, 'America/Los_Angeles');
-    job.start();
+
 
     res.send('OK first');
 
@@ -1059,7 +1025,7 @@ router.get('/metabasecronsa', function(req, res, next) {
 
     var CronJob = require('cron').CronJob;
     //new CronJob('00 00 00 * * *', function() {
-    var job = new CronJob('* 40 14 * * *', function() {
+    new CronJob('01 40 00 * * *', function() {
 
         axios.get('http://'+url+'/automation?metaid=1639&spreadsheetid=1a06IlUcIDIO9uncgeX9nrcuqvhvx-FM5IqyrDj4Un28&sheetname=arabclicks')
             .then(function (response) {
@@ -1104,58 +1070,58 @@ router.get('/metabasecronsa', function(req, res, next) {
                                                                                     })
                                                                                     .catch(function (error) {
                                                                                         // handle error
-                                                                                        console.log(error);
+                                                                                        res.send(error) ; console.log(error);
                                                                                     });
 
                                                                             })
                                                                             .catch(function (error) {
                                                                                 // handle error
-                                                                                console.log(error);
+                                                                                res.send(error) ; console.log(error);
                                                                             });
                                                                     })
                                                                     .catch(function (error) {
                                                                         // handle error
-                                                                        console.log(error);
+                                                                        res.send(error) ; console.log(error);
                                                                     });
                                                             })
                                                             .catch(function (error) {
                                                                 // handle error
-                                                                console.log(error);
+                                                                res.send(error) ; console.log(error);
                                                             });
                                                     })
                                                     .catch(function (error) {
                                                         // handle error
-                                                        console.log(error);
+                                                        res.send(error) ; console.log(error);
                                                     });
                                             })
                                             .catch(function (error) {
                                                 // handle error
-                                                console.log(error);
+                                                res.send(error) ; console.log(error);
                                             });
                                     })
                                     .catch(function (error) {
                                         // handle error
-                                        console.log(error);
+                                        res.send(error) ; console.log(error);
                                     });
 
                             })
                             .catch(function (error) {
                                 // handle error
-                                console.log(error);
+                                res.send(error) ; console.log(error);
                             });
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
+                        res.send(error) ; console.log(error);
                     });
             })
             .catch(function (error) {
                 // handle error
-                console.log(error);
+                res.send(error) ; console.log(error);
             });
 
     }, null, true, 'America/Los_Angeles');
-    job.start();
+
 
     res.send('OK first');
 
@@ -1167,7 +1133,7 @@ router.get('/metabasecrontn', function(req, res, next) {
 
     var CronJob = require('cron').CronJob;
     //new CronJob('00 00 00 * * *', function() {
-    var job = new CronJob('* 45 14 * * *', function() {
+    new CronJob('01 45 00 * * *', function() {
 
         axios.get('http://'+url+'/automation?metaid=1611&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=arabclicks')
             .then(function (response) {
@@ -1216,48 +1182,48 @@ router.get('/metabasecrontn', function(req, res, next) {
                                                                                             })
                                                                                             .catch(function (error) {
                                                                                                 // handle error
-                                                                                                console.log(error);
+                                                                                                res.send(error) ; console.log(error);
                                                                                                 res.send('ERROR');                                                                                            });
                                                                                     })
                                                                                     .catch(function (error) {
                                                                                         // handle error
-                                                                                        console.log(error);
+                                                                                        res.send(error) ; console.log(error);
                                                                                         res.send('ERROR');
                                                                                     });
                                                                             })
                                                                             .catch(function (error) {
                                                                                 // handle error
-                                                                                console.log(error);
+                                                                                res.send(error) ; console.log(error);
                                                                                 res.send('ERROR');
                                                                             });
                                                                     })
                                                                     .catch(function (error) {
                                                                         // handle error
-                                                                        console.log(error);
+                                                                        res.send(error) ; console.log(error);
                                                                         res.send('ERROR');
                                                                     });
                                                             })
                                                             .catch(function (error) {
                                                                 // handle error
-                                                                console.log(error);
+                                                                res.send(error) ; console.log(error);
                                                                 res.send('ERROR');
                                                             });
                                                     })
                                                     .catch(function (error) {
                                                         // handle error
-                                                        console.log(error);
+                                                        res.send(error) ; console.log(error);
                                                         res.send('ERROR');
                                                     });
                                             })
                                             .catch(function (error) {
                                                 // handle error
-                                                console.log(error);
+                                                res.send(error) ; console.log(error);
                                                 res.send('ERROR');
                                             });
                                     })
                                     .catch(function (error) {
                                         // handle error
-                                        console.log(error);
+                                        res.send(error) ; console.log(error);
                                         res.send('ERROR');
                                     });
                             })
@@ -1280,7 +1246,7 @@ router.get('/metabasecrontn', function(req, res, next) {
             });
 
     }, null, true, 'America/Los_Angeles');
-    job.start();
+
 
     res.send('OK first');
 
