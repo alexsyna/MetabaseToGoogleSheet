@@ -1309,7 +1309,7 @@ router.get('/metabaseeg', function(req, res, next) {
 
     var CronJob = require('cron').CronJob;
     //new CronJob('00 00 00 * * *', function() {
-    var job = new CronJob('01 05 00 * * *', function() {
+
 
         axios.get('http://'+url+'/automation?metaid=1607&spreadsheetid=13MvAUFQ8u-BvsyUHr3co6Hrxfo0WM-wtk9Ix7nDK5rk&sheetname=arabclicks')
             .then(function (response) {
@@ -1405,7 +1405,6 @@ router.get('/metabaseeg', function(req, res, next) {
 
 
 
-    }, null, true, 'America/Los_Angeles');
 
     res.send('OK');
 });
@@ -1416,7 +1415,7 @@ router.get('/metabaseae', function(req, res, next) {
 
     var CronJob = require('cron').CronJob;
     //new CronJob('00 00 00 * * *', function() {
-    new CronJob('01 10 00 * * *', function() {
+
 
         axios.get('http://'+url+'/automation?metaid=1608&spreadsheetid=1u9fpBU-fTCbLbXIMtvK16oVo0RS9doJENLjkjQd2O4w&sheetname=arabclicks')
             .then(function (response) {
@@ -1510,9 +1509,6 @@ router.get('/metabaseae', function(req, res, next) {
                 res.send(error) ; console.log(error);
             });
 
-
-
-    }, null, true, 'America/Los_Angeles');
 
     res.send('OK');
 });
@@ -1626,8 +1622,7 @@ router.get('/metabaseiq', function(req, res, next) {
     var url = req.headers.host;
 
     var CronJob = require('cron').CronJob;
-    //new CronJob('00 00 00 * * *', function() {
-    new CronJob('01 20 00 * * *', function() {
+
 
         axios.get('http://'+url+'/automation?metaid=1640&spreadsheetid=1mtjKsr617kk4HgWeYGDEu4nAu426yac6NUzLSppiteY&sheetname=arabclicks')
             .then(function (response) {
@@ -1722,7 +1717,6 @@ router.get('/metabaseiq', function(req, res, next) {
             });
 
 
-    }, null, true, 'America/Los_Angeles');
 
 
     res.send('OK first');
@@ -1734,8 +1728,7 @@ router.get('/metabasejo', function(req, res, next) {
     var url = req.headers.host;
 
     var CronJob = require('cron').CronJob;
-    //new CronJob('00 00 00 * * *', function() {
-    new CronJob('01 25 00 * * *', function() {
+
 
         axios.get('http://'+url+'/automation?metaid=1610&spreadsheetid=13EmU8VUfec-8lC6FpdSFydoJZOsO8JPbSU2YSm5JS04&sheetname=arabclicks')
             .then(function (response) {
@@ -1832,27 +1825,6 @@ router.get('/metabasejo', function(req, res, next) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    }, null, true, 'America/Los_Angeles');
-
-
     res.send('OK first');
 
 });
@@ -1862,8 +1834,7 @@ router.get('/metabasekw', function(req, res, next) {
     var url = req.headers.host;
 
     var CronJob = require('cron').CronJob;
-    //new CronJob('00 00 00 * * *', function() {
-    new CronJob('01 30 00 * * *', function() {
+
 
         axios.get('http://'+url+'/automation?metaid=1613&spreadsheetid=1BrU9az8JTALQ5kOh2nMe-QAPeSyDGyb3ZIcbKoM_Xqg&sheetname=arabclicks')
             .then(function (response) {
@@ -1956,7 +1927,6 @@ router.get('/metabasekw', function(req, res, next) {
                 res.send(error) ; console.log(error);
             });
 
-    }, null, true, 'America/Los_Angeles');
 
 
     res.send('OK first');
@@ -1968,8 +1938,7 @@ router.get('/metabaseps', function(req, res, next) {
     var url = req.headers.host;
 
     var CronJob = require('cron').CronJob;
-    //new CronJob('00 00 00 * * *', function() {
-    new CronJob('01 35 00 * * *', function() {
+
 
         axios.get('http://'+url+'/automation?metaid=1612&spreadsheetid=1uw8q-L3c5FrSHUsxnO2a1uDTf6riAv2mDmDTOV5xI0M&sheetname=arabclicks')
             .then(function (response) {
@@ -2064,8 +2033,6 @@ router.get('/metabaseps', function(req, res, next) {
 
 
 
-    }, null, true, 'America/Los_Angeles');
-
 
     res.send('OK first');
 
@@ -2076,8 +2043,7 @@ router.get('/metabasesa', function(req, res, next) {
     var url = req.headers.host;
 
     var CronJob = require('cron').CronJob;
-    //new CronJob('00 00 00 * * *', function() {
-    new CronJob('01 40 00 * * *', function() {
+
 
         axios.get('http://'+url+'/automation?metaid=1639&spreadsheetid=1a06IlUcIDIO9uncgeX9nrcuqvhvx-FM5IqyrDj4Un28&sheetname=arabclicks')
             .then(function (response) {
@@ -2172,7 +2138,6 @@ router.get('/metabasesa', function(req, res, next) {
                 res.send(error) ; console.log(error);
             });
 
-    }, null, true, 'America/Los_Angeles');
 
 
     res.send('OK first');
@@ -2184,8 +2149,7 @@ router.get('/metabasetn', function(req, res, next) {
     var url = req.headers.host;
 
     var CronJob = require('cron').CronJob;
-    //new CronJob('00 00 00 * * *', function() {
-    new CronJob('01 45 00 * * *', function() {
+
 
         axios.get('http://'+url+'/automation?metaid=1611&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=arabclicks')
             .then(function (response) {
@@ -2296,8 +2260,6 @@ router.get('/metabasetn', function(req, res, next) {
                 console.log(error);
                 res.send('ERROR');
             });
-
-    }, null, true, 'America/Los_Angeles');
 
 
     res.send('OK first');
