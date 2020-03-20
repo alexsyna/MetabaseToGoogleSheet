@@ -1255,12 +1255,12 @@ router.get('/metabasecrontn', function(req, res, next) {
 
 //-----------------------------------------------------------------
 
-router.get('/metabase', function(req, res, next) {
+router.get('/metabaseroi', function(req, res, next) {
     var url = req.headers.host;
 
     var CronJob = require('cron').CronJob;
     //new CronJob('00 00 00 * * *', function() {
-    new CronJob('01 00 00 * * *', function() {
+
 
         axios.get('http://'+url+'/automation?metaid=133&spreadsheetid=1AZYEgYISOznG6A7DUUG6fnTGXKre8P9o3hNBKFjsO6A&sheetname=RevenuesPerDate')
             .then(function (response) {
@@ -1296,10 +1296,7 @@ router.get('/metabase', function(req, res, next) {
                 res.send(error) ; console.log(error);
             });
 
-    }, null, true, 'America/Los_Angeles');
 
-
-    res.send('OK');
 
 
 
