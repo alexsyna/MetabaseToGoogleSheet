@@ -197,6 +197,56 @@ router.get('/automation', function(req, res, next) {
 
 });
 
+router.get('/metabasecronroi', function(req, res, next) {
+    var url = req.headers.host;
+
+    var CronJob = require('cron').CronJob;
+    new CronJob('00 00 00 * * *', function() {
+
+
+    axios.get('http://'+url+'/automation?metaid=133&spreadsheetid=1AZYEgYISOznG6A7DUUG6fnTGXKre8P9o3hNBKFjsO6A&sheetname=RevenuesPerDate')
+        .then(function (response) {
+            // handle success
+            axios.get('http://'+url+'/automation?metaid=135&spreadsheetid=1AZYEgYISOznG6A7DUUG6fnTGXKre8P9o3hNBKFjsO6A&sheetname=RevenuesPerFirstSubDate')
+                .then(function (response) {
+                    // handle success
+                    axios.get('http://'+url+'/automation?metaid=134&spreadsheetid=1AZYEgYISOznG6A7DUUG6fnTGXKre8P9o3hNBKFjsO6A&sheetname=Subscribers')
+                        .then(function (response) {
+                            // handle success
+                            axios.get('http://'+url+'/automation?metaid=142&spreadsheetid=1AZYEgYISOznG6A7DUUG6fnTGXKre8P9o3hNBKFjsO6A&sheetname=UnSubscribers')
+                                .then(function (response) {
+                                    // handle success
+                                    console.log("ROI - 4 exports ran succesfully at :"+moment().format());
+                                })
+                                .catch(function (error) {
+                                    // handle error
+                                    res.send(error) ; console.log(error);
+                                });
+                        })
+                        .catch(function (error) {
+                            // handle error
+                            res.send(error) ; console.log(error);
+                        });
+                })
+                .catch(function (error) {
+                    // handle error
+                    res.send(error) ; console.log(error);
+                });
+        })
+        .catch(function (error) {
+            // handle error
+            res.send(error) ; console.log(error);
+        });
+
+
+
+
+}, null, true, 'America/Los_Angeles');
+
+
+res.send('OK');
+
+});
 
 router.get('/metabasecron', function(req, res, next) {
     var url = req.headers.host;
