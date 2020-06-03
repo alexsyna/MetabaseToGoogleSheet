@@ -201,7 +201,7 @@ router.get('/metabasecronroi', function(req, res, next) {
     var url = req.headers.host;
 
     var CronJob = require('cron').CronJob;
-    new CronJob('00 00 00 * * *', function() {
+    new CronJob('01 05 00 * * *', function() {
 
 
     axios.get('http://'+url+'/automation?metaid=133&spreadsheetid=1AZYEgYISOznG6A7DUUG6fnTGXKre8P9o3hNBKFjsO6A&sheetname=RevenuesPerDate')
@@ -1294,6 +1294,31 @@ router.get('/metabasecrontn', function(req, res, next) {
                 console.log(error);
                 res.send('ERROR');
             });
+
+    }, null, true, 'America/Los_Angeles');
+
+
+    res.send('OK first');
+
+});
+
+router.get('/metabaserecruitmentflashwin', function(req, res, next) {
+
+    var url = req.headers.host;
+
+    var CronJob = require('cron').CronJob;
+    //new CronJob('00 00 00 * * *', function() {
+    new CronJob('01 45 00 * * *', function() {
+
+        axios.get('http://'+url+'/automation?metaid=1739&spreadsheetid=18P3ULTE1w6ExiDvysF6Lk1DPnlFfZNRqB0Iglvst6g8&sheetname=nosource')
+            .then(function (response) {
+                // handle success
+                console.log("TN LTV - 10 exports ran succesfully at :"+moment().format());
+            })
+            .catch(function (error) {
+                // handle error
+                res.send(error) ; console.log(error);
+                res.send('ERROR');                                                                                            });
 
     }, null, true, 'America/Los_Angeles');
 
