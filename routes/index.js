@@ -80,8 +80,8 @@ router.get('/automation', function(req, res, next) {
     var sheetname =  req.query.sheetname;
 
     const data = {
-        "username": "Alexandros.synadinos@gugroup.com",
-        "password": "19921924"
+        "username": "metabase_email",
+        "password": "pass"
     };
 
     axios.post('https://reporting-flashwin.gugroup.com/api/session', data)
